@@ -5,7 +5,7 @@
 
     <groupId>at.ac.tuwien.isis</groupId>
     <artifactId>c3po</artifactId>
-    <version>0.5.0</version>
+    <version>0.8.0</version>
     <packaging>pom</packaging>
     <name>C3PO</name>
     <description>Characterization, Content and Collection Profiling of Objects</description>
