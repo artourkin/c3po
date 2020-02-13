@@ -1,0 +1,3 @@
+[submodule "fits-api"]
+	path = fits-api
+	url = https://github.com/dans-er/fits-api.git
