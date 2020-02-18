@@ -6,9 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockserver.integration.ClientAndServer;
-import org.mockserver.model.Header;
 
-import static io.restassured.RestAssured.given;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
@@ -18,7 +16,7 @@ class FITSClientTest {
 
     @BeforeEach
     void setUp() {
-        mockServer = mockServer.startClientAndServer(1080);
+        mockServer = mockServer.startClientAndServer(8080);
     }
 
     @AfterEach
@@ -32,25 +30,21 @@ class FITSClientTest {
 
         mockServer.when(
                 request()
-                        .withMethod("/fits/version")
-                        .withPath("POST")
+                        .withMethod("GET")
+                        .withPath("/version")
                         .withHeader("\"Content-type\", \"application/json\""))
                 .respond(
                         response()
                                 .withStatusCode(200)
-                                .withHeaders(
-                                        new Header("Content-Type", "application/json; charset=utf-8"))
                                 .withBody("1.5.0")
                 );
 
-        String s = given().contentType("application/json")
-                .when()
-                .post("/fits/version")
-                .then()
-                .statusCode(200)
-                .extract().response().asString();
 
-        Assert.assertEquals("", s);
+        FITSClient fitsClient = new FITSClient();
+        String s = fitsClient.processFile();
+
+
+        Assert.assertEquals("1.5.0", s);
 
     }
 }
