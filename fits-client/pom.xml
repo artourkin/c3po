@@ -132,5 +132,10 @@
             <version>1.2.0.Final</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-multipart-provider</artifactId>
+            <version>2.2.0.GA</version>
+        </dependency>
     </dependencies>
 </project>

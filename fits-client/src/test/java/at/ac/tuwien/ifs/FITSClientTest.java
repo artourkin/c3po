@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockserver.integration.ClientAndServer;
 
+import java.io.File;
+import java.io.IOException;
+
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
@@ -16,7 +19,7 @@ class FITSClientTest {
 
     @BeforeEach
     void setUp() {
-        mockServer = mockServer.startClientAndServer(8080);
+        mockServer = mockServer.startClientAndServer(8088);
     }
 
     @AfterEach
@@ -26,7 +29,7 @@ class FITSClientTest {
 
 
     @Test
-    void processFile() {
+    void getVersionTest() {
 
         mockServer.when(
                 request()
@@ -41,7 +44,19 @@ class FITSClientTest {
 
 
         FITSClient fitsClient = new FITSClient();
-        String s = fitsClient.processFile();
+        String s = fitsClient.getVersion();
+
+
+        Assert.assertEquals("1.5.0", s);
+
+    }
+
+
+    @Test
+    void processFileTest() throws IOException {
+
+        FITSClient fitsClient = new FITSClient();
+        String s = fitsClient.processFile(new File("/Users/artur/rnd/git/c3po/README.md"));
 
 
         Assert.assertEquals("1.5.0", s);
