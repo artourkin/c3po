@@ -1,5 +1,6 @@
 package at.ac.tuwien.ifs;
 
+import io.quarkus.test.junit.QuarkusTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +12,7 @@ import static io.restassured.RestAssured.given;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
-
+@QuarkusTest
 class FITSClientTest {
     private ClientAndServer mockServer;
 
