@@ -1,9 +1,0 @@
-2020-02-15 02:12:22 -  INFO - Fits:194 - Logging initialized with: file:/Users/artur/rnd/git/c3po/fits-wrap/log4j.properties
-2020-02-15 02:12:22 - FATAL - Fits:202 - Error reading xml/fits.xml: org.apache.commons.configuration.ConfigurationException
-2020-02-15 02:15:41 -  INFO - Fits:194 - Logging initialized with: file:/Users/artur/rnd/git/c3po/fits-wrap/log4j.properties
-2020-02-15 02:16:43 -  INFO - Fits:194 - Logging initialized with: file:/Users/artur/rnd/git/c3po/fits-wrap/log4j.properties
-2020-02-15 02:17:28 -  INFO - Fits:194 - Logging initialized with: file:/Users/artur/rnd/git/c3po/fits-wrap/log4j.properties
-2020-02-15 02:18:24 -  INFO - Fits:194 - Logging initialized with: file:/Users/artur/rnd/git/c3po/fits-wrap/log4j.properties
-2020-02-15 02:19:05 -  INFO - Fits:194 - Logging initialized with: file:/Users/artur/rnd/git/c3po/fits-wrap/log4j.properties
-2020-02-15 02:19:05 - FATAL - Fits:208 - Error creating FITS XML Mapper: java.io.FileNotFoundException
-2020-02-15 02:19:58 -  INFO - Fits:194 - Logging initialized with: file:/Users/artur/rnd/git/c3po/fits-wrap/log4j.properties

@@ -12,7 +12,7 @@
 
     <modules>
         <module>doi</module>
-        <module>fits-wrap</module>
+        <module>fits-client</module>
     </modules>
 
 </project>
