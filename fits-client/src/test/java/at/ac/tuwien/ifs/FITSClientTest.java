@@ -16,12 +16,12 @@ import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
 @QuarkusTest
-class FITSClientTest {
+public class FITSClientTest {
     private ClientAndServer mockServer;
 
     private int MOCK_SERVER_PORT = 8088;
 
-    private String VALID_FITS_RESULT = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+    public static String VALID_FITS_RESULT = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<fits xmlns=\"http://hul.harvard.edu/ois/xml/ns/fits/fits_output\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://hul.harvard.edu/ois/xml/ns/fits/fits_output http://hul.harvard.edu/ois/xml/xsd/fits/fits_output.xsd\" version=\"1.5.0\" timestamp=\"2/19/20 1:26 PM\">\n" +
             "  <identification status=\"CONFLICT\">\n" +
             "    <identity format=\"Markdown\" mimetype=\"text/markdown\" toolname=\"FITS\" toolversion=\"1.5.0\">\n" +
