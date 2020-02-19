@@ -1,0 +1,60 @@
+package at.ac.tuwien.ifs.FITSObjects;
+
+import java.util.Map;
+
+public class IdentityProperty {
+    private String format;
+    private String toolname;
+    private String toolversion;
+    private String mimetype;
+    private Map<String, Object> tool;
+    private Map<String, Object> externalIdentifier;
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public String getToolname() {
+        return toolname;
+    }
+
+    public void setToolname(String toolname) {
+        this.toolname = toolname;
+    }
+
+    public String getToolversion() {
+        return toolversion;
+    }
+
+    public void setToolversion(String toolversion) {
+        this.toolversion = toolversion;
+    }
+
+    public String getMimetype() {
+        return mimetype;
+    }
+
+    public void setMimetype(String mimetype) {
+        this.mimetype = mimetype;
+    }
+
+    public Map<String, Object> getTool() {
+        return tool;
+    }
+
+    public void setTool(Map<String, Object> tool) {
+        this.tool = tool;
+    }
+
+    public Map<String, Object> getExternalIdentifier() {
+        return externalIdentifier;
+    }
+
+    public void setExternalIdentifier(Map<String, Object> externalIdentifier) {
+        this.externalIdentifier = externalIdentifier;
+    }
+}

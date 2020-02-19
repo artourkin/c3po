@@ -7,6 +7,8 @@ import io.quarkus.test.junit.QuarkusTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 @QuarkusTest
 class JSONToolkitTest {
 
@@ -19,9 +21,22 @@ class JSONToolkitTest {
     @Test
     void getCharacterisationResultTest() {
         String jsonString = JSONToolkit.translateXML(FITSClientTest.VALID_FITS_RESULT);
-        CharacterisationResult filename = JSONToolkit.getCharacterisationResult(FITSPropertyJsonPath.FILENAME.getFitsProperty(), jsonString);
+        List<CharacterisationResult> results = JSONToolkit.getCharacterisationResult(FITSPropertyJsonPath.FILENAME,
+                jsonString);
 
-        Assert.assertEquals("CharacterisationResult{property=FILENAME, value=README.md, valueType=STRING, source=DROID3}", filename.toString());
+        Assert.assertEquals("CharacterisationResult{property=FILENAME, value=README.md, valueType=STRING, " +
+                "source=DROID3}", results.get(0).toString());
+    }
+
+
+    @Test
+    void getCharacterisationResultIdentificationTest() {
+        String jsonString = JSONToolkit.translateXML(FITSClientTest.VALID_FITS_RESULT);
+        List<CharacterisationResult> results = JSONToolkit.getCharacterisationResult(FITSPropertyJsonPath.IDENTIFICATION,
+                jsonString);
+
+        Assert.assertEquals("CharacterisationResult{property=FILENAME, value=README.md, valueType=STRING, " +
+                "source=DROID3}", results.get(0).toString());
 
 
     }

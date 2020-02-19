@@ -4,7 +4,7 @@ public class CharacterisationResult {
     private Property property;
     private Object value;
     private ValueType valueType;
-    private Source source;
+    private String source;
 
     public Property getProperty() {
         return property;
@@ -30,11 +30,11 @@ public class CharacterisationResult {
         this.valueType = valueType;
     }
 
-    public Source getSource() {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(Source source) {
+    public void setSource(String source) {
         this.source = source;
     }
 
