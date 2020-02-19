@@ -22,18 +22,7 @@ public class FITSClient {
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(FITS_HOST + "version");
-        CloseableHttpResponse response = httpclient.execute(httpGet);
-
-
-        int statusCode = response.getStatusLine().getStatusCode();
-        String responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
-
-        if (statusCode > 200) {
-            response.close();
-            throw new WebApplicationException(responseBody, statusCode);
-        }
-
-        return responseBody;
+        return getString(httpclient.execute(httpGet));
     }
 
     public String processFile(File file) throws IOException {
@@ -46,7 +35,12 @@ public class FITSClient {
         HttpEntity reqEntity = builder.build();
         httppost.setEntity(reqEntity);
 
-        CloseableHttpResponse response = httpclient.execute(httppost);
+        return getString(httpclient.execute(httppost));
+
+    }
+
+    private String getString(CloseableHttpResponse execute) throws IOException {
+        CloseableHttpResponse response = execute;
         int statusCode = response.getStatusLine().getStatusCode();
         String responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
         if (statusCode > 200) {
@@ -55,7 +49,6 @@ public class FITSClient {
         }
 
         return responseBody;
-
     }
 
 
