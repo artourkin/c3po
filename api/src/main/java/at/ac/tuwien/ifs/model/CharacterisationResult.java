@@ -37,4 +37,14 @@ public class CharacterisationResult {
     public void setSource(Source source) {
         this.source = source;
     }
+
+    @Override
+    public String toString() {
+        return "CharacterisationResult{" +
+                "property=" + property +
+                ", value=" + value +
+                ", valueType=" + valueType +
+                ", source=" + source +
+                '}';
+    }
 }
