@@ -14,6 +14,7 @@
         <module>doi</module>
         <module>fits-client</module>
         <module>api</module>
+        <module>persistence</module>
     </modules>
 
 </project>
