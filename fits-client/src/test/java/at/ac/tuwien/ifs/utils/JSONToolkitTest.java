@@ -23,7 +23,7 @@ class JSONToolkitTest {
     @Test
     void getCharacterisationResultTest() {
         String jsonString = JSONToolkit.translateXML(FITSClientTest.VALID_FITS_RESULT);
-        List<CharacterisationResult> results = JSONToolkit.getCharacterisationResult(FITSPropertyJsonPath.FILENAME,
+        List<CharacterisationResult> results = JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.FILENAME,
                 jsonString);
 
         Assert.assertEquals("CharacterisationResult{property=FILENAME, value=README.md, valueType=STRING, source=OIS File Information:1}", results.get(0).toString());
@@ -33,7 +33,7 @@ class JSONToolkitTest {
     @Test
     void getCharacterisationResultIdentificationTest() {
         String jsonString = JSONToolkit.translateXML(FITSClientTest.VALID_FITS_RESULT);
-        List<CharacterisationResult> results = JSONToolkit.getCharacterisationResult(FITSPropertyJsonPath.IDENTIFICATION,
+        List<CharacterisationResult> results = JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.IDENTIFICATION,
                 jsonString);
 
         System.out.println(results);

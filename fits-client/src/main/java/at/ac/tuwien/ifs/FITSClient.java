@@ -1,6 +1,9 @@
 package at.ac.tuwien.ifs;
 
 
+import at.ac.tuwien.ifs.FITSObjects.FITSPropertyJsonPath;
+import at.ac.tuwien.ifs.model.CharacterisationResult;
+import at.ac.tuwien.ifs.utils.JSONToolkit;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -14,6 +17,9 @@ import org.apache.http.util.EntityUtils;
 import javax.ws.rs.WebApplicationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class FITSClient {
     private String FITS_HOST = "ttp://localhost:8080/";
@@ -25,7 +31,7 @@ public class FITSClient {
         return getString(httpclient.execute(httpGet));
     }
 
-    public String processFile(File file) throws IOException {
+    public List<CharacterisationResult> processFile(File file) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
         HttpPost httppost = new HttpPost(FITS_HOST + "examine");
@@ -35,7 +41,23 @@ public class FITSClient {
         HttpEntity reqEntity = builder.build();
         httppost.setEntity(reqEntity);
 
-        return getString(httpclient.execute(httppost));
+        String fitsResultXML = getString(httpclient.execute(httppost));
+
+        String fitsResultJSON = JSONToolkit.translateXML(fitsResultXML);
+
+        Set<String> availableFitsProperties = JSONToolkit.getAvailableFitsProperties(fitsResultJSON);
+
+        List<CharacterisationResult> results = new ArrayList<>();
+
+        availableFitsProperties.forEach(property -> {
+            List<CharacterisationResult> characterisationResults = JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.valueOf(property.toUpperCase()), fitsResultJSON);
+            results.addAll(characterisationResults);
+        });
+
+        List<CharacterisationResult> characterisationResults = JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.IDENTIFICATION, fitsResultJSON);
+        results.addAll(characterisationResults);
+
+        return results;
 
     }
 

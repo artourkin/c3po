@@ -1,5 +1,6 @@
 package at.ac.tuwien.ifs;
 
+import at.ac.tuwien.ifs.model.CharacterisationResult;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
@@ -11,6 +12,7 @@ import org.mockserver.integration.ClientAndServer;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
@@ -111,9 +113,9 @@ public class FITSClientTest {
         fitsClient.setFITS_HOST(String.format("http://localhost:%d/fits/", 8088));
 
         URL resource = getClass().getClassLoader().getResource("README.md");
-        String output = fitsClient.processFile(new File(resource.getPath()));
+        List<CharacterisationResult> output = fitsClient.processFile(new File(resource.getPath()));
 
-        Assert.assertEquals(VALID_FITS_RESULT, output);
+        Assert.assertEquals(12, output.size());
     }
 
 
@@ -125,8 +127,8 @@ public class FITSClientTest {
         fitsClient.setFITS_HOST(String.format("http://localhost:%d/fits/", 8080));
 
         URL resource = getClass().getClassLoader().getResource("README.md");
-        String output = fitsClient.processFile(new File(resource.getPath()));
+        List<CharacterisationResult> output = fitsClient.processFile(new File(resource.getPath()));
 
-        Assert.assertTrue(output.contains("Tika"));
+        Assert.assertEquals(12, output.size());
     }
 }

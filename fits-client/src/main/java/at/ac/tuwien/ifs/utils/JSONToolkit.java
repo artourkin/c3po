@@ -31,21 +31,21 @@ public class JSONToolkit {
         return jsonPrettyPrintString;
     }
 
-    public static Set getAvailableFitsProperties(String jsonString) {
+    public static Set<String> getAvailableFitsProperties(String jsonString) {
         Configuration configuration = Configuration.defaultConfiguration();
         MappingProvider mappingProvider = new JacksonMappingProvider();
         configuration = configuration.mappingProvider(mappingProvider);
         DocumentContext document = JsonPath.parse(jsonString, configuration);
 
         Map mapOfProperties = document.read("$.fits.fileinfo", Map.class);
-
-        return mapOfProperties.keySet();
+        Set<String> set = (Set<String>) mapOfProperties.keySet();
+        return set;
 
     }
 
 
-    public static List<CharacterisationResult> getCharacterisationResult(FITSPropertyJsonPath fitsProperty,
-                                                                         String jsonString) {
+    public static List<CharacterisationResult> getCharacterisationResults(FITSPropertyJsonPath fitsProperty,
+                                                                          String jsonString) {
         List<CharacterisationResult> result = new ArrayList<>();
 
         Configuration configuration = Configuration.defaultConfiguration();
