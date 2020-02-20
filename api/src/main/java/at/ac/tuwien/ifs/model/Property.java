@@ -6,5 +6,6 @@ public enum Property {
     MIMETYPE,
     FILENAME,
     AUTHOR,
+    EXTERNALIDENTIFIER
 
 }

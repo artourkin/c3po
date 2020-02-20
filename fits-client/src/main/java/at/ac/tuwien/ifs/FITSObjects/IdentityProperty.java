@@ -7,7 +7,7 @@ public class IdentityProperty {
     private String toolname;
     private String toolversion;
     private String mimetype;
-    private Map<String, Object> tool;
+    private Object tool;
     private Map<String, Object> externalIdentifier;
 
     public String getFormat() {
@@ -42,11 +42,11 @@ public class IdentityProperty {
         this.mimetype = mimetype;
     }
 
-    public Map<String, Object> getTool() {
+    public Object getTool() {
         return tool;
     }
 
-    public void setTool(Map<String, Object> tool) {
+    public void setTool(Object tool) {
         this.tool = tool;
     }
 
@@ -56,5 +56,17 @@ public class IdentityProperty {
 
     public void setExternalIdentifier(Map<String, Object> externalIdentifier) {
         this.externalIdentifier = externalIdentifier;
+    }
+
+    @Override
+    public String toString() {
+        return "IdentityProperty{" +
+                "format='" + format + '\'' +
+                ", toolname='" + toolname + '\'' +
+                ", toolversion='" + toolversion + '\'' +
+                ", mimetype='" + mimetype + '\'' +
+                ", tool=" + tool +
+                ", externalIdentifier=" + externalIdentifier +
+                '}';
     }
 }

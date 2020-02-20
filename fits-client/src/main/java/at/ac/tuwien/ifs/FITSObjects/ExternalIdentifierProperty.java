@@ -1,11 +1,11 @@
 package at.ac.tuwien.ifs.FITSObjects;
 
-public class GenericProperty {
+public class ExternalIdentifierProperty {
     private String toolname;
     private String toolversion;
     private String content;
     private String status;
-    private String property;
+    private String type;
 
     public String getToolname() {
         return toolname;
@@ -39,11 +39,11 @@ public class GenericProperty {
         this.status = status;
     }
 
-    public String getProperty() {
-        return property;
+    public String getType() {
+        return type;
     }
 
-    public void setProperty(String property) {
-        this.property = property;
+    public void setType(String type) {
+        this.type = type;
     }
 }
