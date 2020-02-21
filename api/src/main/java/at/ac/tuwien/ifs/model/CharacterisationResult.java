@@ -1,7 +1,5 @@
 package at.ac.tuwien.ifs.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,13 +8,12 @@ import javax.persistence.Id;
 @Entity
 public class CharacterisationResult {
 
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
 
     private Property property;
-    private Object value;
+    private String value;
     private ValueType valueType;
     private String source;
     private String filePath;
@@ -29,11 +26,11 @@ public class CharacterisationResult {
         this.property = property;
     }
 
-    public Object getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Object value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
@@ -69,5 +66,13 @@ public class CharacterisationResult {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
