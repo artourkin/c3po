@@ -1,5 +1,8 @@
 package at.ac.tuwien.ifs.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +13,7 @@ public class CharacterisationResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @JsonIgnore
     private Long id;
 
     private Property property;
@@ -53,10 +57,12 @@ public class CharacterisationResult {
     @Override
     public String toString() {
         return "CharacterisationResult{" +
-                "property=" + property +
-                ", value=" + value +
+                "id=" + id +
+                ", property=" + property +
+                ", value='" + value + '\'' +
                 ", valueType=" + valueType +
-                ", source=" + source +
+                ", source='" + source + '\'' +
+                ", filePath='" + filePath + '\'' +
                 '}';
     }
 

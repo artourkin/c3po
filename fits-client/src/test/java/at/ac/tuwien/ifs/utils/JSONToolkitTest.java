@@ -26,7 +26,7 @@ class JSONToolkitTest {
         List<CharacterisationResult> results = JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.FILENAME,
                 jsonString);
 
-        Assert.assertEquals("CharacterisationResult{property=FILENAME, value=README.md, valueType=STRING, source=OIS File Information:1}", results.get(0).toString());
+        Assert.assertEquals("CharacterisationResult{id=null, property=FILENAME, value='README.md', valueType=STRING, source='OIS File Information:1', filePath='null'}", results.get(0).toString());
     }
 
 
