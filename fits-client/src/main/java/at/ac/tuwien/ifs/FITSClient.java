@@ -3,6 +3,7 @@ package at.ac.tuwien.ifs;
 
 import at.ac.tuwien.ifs.FITSObjects.FITSPropertyJsonPath;
 import at.ac.tuwien.ifs.model.CharacterisationResult;
+import at.ac.tuwien.ifs.model.Property;
 import at.ac.tuwien.ifs.utils.JSONToolkit;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -57,8 +58,17 @@ public class FITSClient {
         List<CharacterisationResult> characterisationResults = JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.IDENTIFICATION, fitsResultJSON);
         results.addAll(characterisationResults);
 
+        String filepath = results.stream().filter(result -> result.getProperty().equals(Property.FILEPATH)).findFirst().get().getValue().toString();
+
+        addFilepathLabel(results, filepath);
+
+
         return results;
 
+    }
+
+    private void addFilepathLabel(List<CharacterisationResult> characterisationResults, String filepath) {
+        characterisationResults.stream().forEach(result -> result.setFilePath(filepath));
     }
 
     private String getString(CloseableHttpResponse execute) throws IOException {

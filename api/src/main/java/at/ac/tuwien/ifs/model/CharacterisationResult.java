@@ -1,10 +1,25 @@
 package at.ac.tuwien.ifs.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class CharacterisationResult {
+
+    @JsonIgnore
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
+
     private Property property;
     private Object value;
     private ValueType valueType;
     private String source;
+    private String filePath;
 
     public Property getProperty() {
         return property;
@@ -46,5 +61,13 @@ public class CharacterisationResult {
                 ", valueType=" + valueType +
                 ", source=" + source +
                 '}';
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }
