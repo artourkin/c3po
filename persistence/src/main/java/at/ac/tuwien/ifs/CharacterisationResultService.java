@@ -24,4 +24,6 @@ public class CharacterisationResultService {
         return all;
     }
 
+
+
 }

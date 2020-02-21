@@ -19,9 +19,10 @@ class CharacterisationResultServiceTest {
     @Test
     void getAllTest() {
 
-        characterisationResultService.addCharacterisationResult(new CharacterisationResult());
+        //characterisationResultService.addCharacterisationResult(new CharacterisationResult());
 
         Iterable<CharacterisationResult> allStudents = characterisationResultService.getAllStudents();
+
         List<CharacterisationResult> studentList = new ArrayList<>();
         allStudents.forEach(studentList::add);
         Assert.assertEquals(1, studentList.size());
