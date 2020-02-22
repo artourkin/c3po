@@ -21,6 +21,8 @@ public interface CharacterisationResultRepository extends CrudRepository<Charact
     @Query("select value, count(*) as count from CharacterisationResult where property= ?1 group by value")
     List<PropertyValueStatistics> getPropertyValueDistribution(Property property);
 
+
+    List<CharacterisationResult> findAllByFilePath(String filePath);
     //  @Query("select property, count(*) as num from CharacterisationResult group by property")
     //  Collection getDistributionDEV();
 }

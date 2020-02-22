@@ -23,25 +23,27 @@ public class CharacterisationResultService {
         characterisationResultRepository.save(characterisationResult);
     }
 
-    public Iterable<CharacterisationResult> getAllStudents() {
+    public Iterable<CharacterisationResult> getAllCharacterisationResults() {
         Iterable<CharacterisationResult> all = characterisationResultRepository.findAll();
         return all;
     }
 
-    public List<PropertyStatistics> getPropertyDistribution(){
+    public List<PropertyStatistics> getPropertyDistribution() {
         List<PropertyStatistics> propertyDistribution = characterisationResultRepository.getPropertyDistribution();
         System.out.println(propertyDistribution);
         return propertyDistribution;
     }
 
-    public List<PropertyValueStatistics> getValueDistributionByProperty(Property property){
+    public List<PropertyValueStatistics> getValueDistributionByProperty(Property property) {
         List<PropertyValueStatistics> propertyValueDistribution =
                 characterisationResultRepository.getPropertyValueDistribution(property);
         System.out.println(propertyValueDistribution);
         return propertyValueDistribution;
     }
 
-
+    public Iterable<CharacterisationResult> getCharacterisationResultsByFilepath(String filepath){
+        return characterisationResultRepository.findAllByFilePath(filepath);
+    }
 
 
 }

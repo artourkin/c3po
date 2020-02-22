@@ -23,7 +23,7 @@ class CharacterisationResultServiceTest {
     @Test
     void getAllCharacterisationResultsTest() {
 
-        Iterable<CharacterisationResult> allStudents = characterisationResultService.getAllStudents();
+        Iterable<CharacterisationResult> allStudents = characterisationResultService.getAllCharacterisationResults();
 
         List<CharacterisationResult> studentList = new ArrayList<>();
         allStudents.forEach(studentList::add);
@@ -40,6 +40,18 @@ class CharacterisationResultServiceTest {
     void getPropertValueyDistributionTest() {
         List<PropertyValueStatistics> propertyValueStatistics =
                 characterisationResultService.getValueDistributionByProperty(Property.FORMAT);
+
+
         Assert.assertEquals(2, propertyValueStatistics.size());
+    }
+
+    @Test
+    void getCharacterisationResultsByFilepathTest() {
+        Iterable<CharacterisationResult> propertyValueStatistics =
+                characterisationResultService.getCharacterisationResultsByFilepath("/home/artur");
+
+        List<CharacterisationResult> list = new ArrayList<>();
+        propertyValueStatistics.forEach(list::add);
+        Assert.assertEquals(4, list.size());
     }
 }
