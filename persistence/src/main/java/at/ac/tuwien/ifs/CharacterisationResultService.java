@@ -1,8 +1,12 @@
 package at.ac.tuwien.ifs;
 
 import at.ac.tuwien.ifs.model.CharacterisationResult;
+import at.ac.tuwien.ifs.model.Property;
+import at.ac.tuwien.ifs.statistics.PropertyStatistics;
+import at.ac.tuwien.ifs.statistics.PropertyValueStatistics;
 
 import javax.enterprise.context.Dependent;
+import java.util.List;
 
 @Dependent
 public class CharacterisationResultService {
@@ -23,6 +27,20 @@ public class CharacterisationResultService {
         Iterable<CharacterisationResult> all = characterisationResultRepository.findAll();
         return all;
     }
+
+    public List<PropertyStatistics> getPropertyDistribution(){
+        List<PropertyStatistics> propertyDistribution = characterisationResultRepository.getPropertyDistribution();
+        System.out.println(propertyDistribution);
+        return propertyDistribution;
+    }
+
+    public List<PropertyValueStatistics> getValueDistributionByProperty(Property property){
+        List<PropertyValueStatistics> propertyValueDistribution =
+                characterisationResultRepository.getPropertyValueDistribution(property);
+        System.out.println(propertyValueDistribution);
+        return propertyValueDistribution;
+    }
+
 
 
 
