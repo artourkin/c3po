@@ -25,6 +25,6 @@ class CharacterisationResultServiceTest {
 
         List<CharacterisationResult> studentList = new ArrayList<>();
         allStudents.forEach(studentList::add);
-        Assert.assertEquals(1, studentList.size());
+        Assert.assertEquals(3, studentList.size());
     }
 }

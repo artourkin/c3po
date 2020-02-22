@@ -2,9 +2,10 @@ package at.ac.tuwien.ifs.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,15 +17,12 @@ public class CharacterisationResult {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @JsonIgnore
     private Long id;
-    @JsonProperty
+    @Enumerated(EnumType.STRING)
     private Property property;
-    @JsonProperty
     private String value;
-    @JsonProperty
+    @Enumerated(EnumType.STRING)
     private ValueType valueType;
-    @JsonProperty
     private String source;
-    @JsonProperty
     private String filePath;
 
     public Property getProperty() {
