@@ -15,6 +15,7 @@
         <module>fits-client</module>
         <module>api</module>
         <module>persistence</module>
+        <module>webui</module>
     </modules>
 
 </project>
