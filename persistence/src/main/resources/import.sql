@@ -7,3 +7,5 @@ INSERT INTO CharacterisationResult(id, filePath, property, source, value, valueT
 'FORMAT_VERSION',
 'DROID:3', '1.4', 'STRING');
 
+INSERT INTO CharacterisationResult(id, filePath, property, source, value, valueType) VALUES (4, '/home/artur2','FORMAT',
+'DROID:3', 'doc', 'STRING');

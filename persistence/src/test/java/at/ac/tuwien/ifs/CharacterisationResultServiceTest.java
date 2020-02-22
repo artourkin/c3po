@@ -19,19 +19,27 @@ class CharacterisationResultServiceTest {
     @Inject
     CharacterisationResultService characterisationResultService;
 
-    @Test
-    void getAllTest() {
 
+    @Test
+    void getAllCharacterisationResultsTest() {
 
         Iterable<CharacterisationResult> allStudents = characterisationResultService.getAllStudents();
 
-
-        List<PropertyStatistics> propertyDistribution = characterisationResultService.getPropertyDistribution();
-
-        List<PropertyValueStatistics> valueDistributionByProperty = characterisationResultService.getValueDistributionByProperty(Property.FORMAT);
-
         List<CharacterisationResult> studentList = new ArrayList<>();
         allStudents.forEach(studentList::add);
-        Assert.assertEquals(3, studentList.size());
+        Assert.assertEquals(4, studentList.size());
+    }
+
+    @Test
+    void getPropertyDistributionTest() {
+        List<PropertyStatistics> propertyDistribution = characterisationResultService.getPropertyDistribution();
+        Assert.assertEquals(3, propertyDistribution.size());
+    }
+
+    @Test
+    void getPropertValueyDistributionTest() {
+        List<PropertyValueStatistics> propertyValueStatistics =
+                characterisationResultService.getValueDistributionByProperty(Property.FORMAT);
+        Assert.assertEquals(2, propertyValueStatistics.size());
     }
 }
