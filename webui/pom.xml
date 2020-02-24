@@ -26,6 +26,8 @@
                 <version>1.9.0</version>
                 <configuration>
                     <workingDirectory>frontend</workingDirectory>
+                    <nodeVersion>${node.version}</nodeVersion>
+                    <yarnVersion>${yarn.version}</yarnVersion>
                 </configuration>
                 <executions>
                     <execution>
@@ -33,14 +35,10 @@
                         <goals>
                             <goal>install-node-and-yarn</goal>
                         </goals>
-                        <configuration>
-                            <nodeVersion>${node.version}</nodeVersion>
-                            <yarnVersion>${yarn.version}</yarnVersion>
-                        </configuration>
                         <phase>generate-resources</phase>
                     </execution>
                     <execution>
-                        <id>yarn install</id>
+                        <id>Install frontend dependencies</id>
                         <goals>
                             <goal>yarn</goal>
                         </goals>
@@ -49,7 +47,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>yarn test</id>
+                        <id>Run frontend tests</id>
                         <goals>
                             <goal>yarn</goal>
                         </goals>
@@ -62,7 +60,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>yarn build</id>
+                        <id>Build frontend</id>
                         <goals>
                             <goal>yarn</goal>
                         </goals>
@@ -73,50 +71,32 @@
                     </execution>
                 </executions>
             </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>Copy frontend build to target</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>frontend/build</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <spring.profiles.active>dev</spring.profiles.active>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>copy-resources</id>
-                                <phase>process-classes</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${basedir}/target/classes/static</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>frontend/build</directory>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                </plugins>
-            </build>
-            <properties>
-                <spring.profiles.active>prod</spring.profiles.active>
-            </properties>
-        </profile>
-    </profiles>
 
 </project>
