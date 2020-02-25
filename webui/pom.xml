@@ -92,7 +92,7 @@
                 <executions>
                     <execution>
                         <id>Copy frontend build to target</id>
-                        <phase>process-resources</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
