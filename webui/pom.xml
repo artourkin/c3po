@@ -15,6 +15,7 @@
         <frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
         <node.version>v10.13.0</node.version>
         <yarn.version>v1.12.1</yarn.version>
+        <quarkus-plugin.version>1.2.1.Final</quarkus-plugin.version>
     </properties>
 
 
@@ -71,6 +72,18 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-maven-plugin</artifactId>
+                <version>${quarkus-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
 
             <plugin>
@@ -84,7 +97,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/classes/resources</outputDirectory>
+                            <outputDirectory>${basedir}/target/classes/META-INF/resources</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>frontend/build</directory>
