@@ -2,8 +2,8 @@ package at.ac.tuwien.ifs;
 
 import at.ac.tuwien.ifs.model.CharacterisationResult;
 import at.ac.tuwien.ifs.model.Property;
-import at.ac.tuwien.ifs.statistics.PropertyStatistics;
-import at.ac.tuwien.ifs.statistics.PropertyValueStatistics;
+import at.ac.tuwien.ifs.model.statistics.PropertyStatistics;
+import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistics;
 
 import javax.enterprise.context.Dependent;
 import java.util.List;

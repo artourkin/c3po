@@ -1,4 +1,4 @@
-package at.ac.tuwien.ifs.statistics;
+package at.ac.tuwien.ifs.model.statistics;
 
 import at.ac.tuwien.ifs.model.Property;
 
