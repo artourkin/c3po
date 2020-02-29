@@ -22,6 +22,8 @@ import {
 } from 'reactstrap';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
+import Histogram from '../../c3po/Histogram.js'
+
 
 const Widget03 = lazy(() => import('../../views/Widgets/Widget03'));
 
@@ -484,7 +486,7 @@ class Dashboard extends Component {
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xs="12" sm="6" lg="3">
+     {/*     <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-info">
               <CardBody className="pb-0">
                 <ButtonGroup className="float-right">
@@ -532,8 +534,8 @@ class Dashboard extends Component {
               </div>
             </Card>
           </Col>
-
-          <Col xs="12" sm="6" lg="3">
+*/}
+     {/*     <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-warning">
               <CardBody className="pb-0">
                 <ButtonGroup className="float-right">
@@ -555,33 +557,19 @@ class Dashboard extends Component {
                 <Line data={cardChartData3} options={cardChartOpts3} height={70} />
               </div>
             </Card>
-          </Col>
+          </Col>*/}
 
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-danger">
               <CardBody className="pb-0">
-                <ButtonGroup className="float-right">
-                  <ButtonDropdown id='card4' isOpen={this.state.card4} toggle={() => { this.setState({ card4: !this.state.card4 }); }}>
-                    <DropdownToggle caret className="p-0" color="transparent">
-                      <i className="icon-settings"></i>
-                    </DropdownToggle>
-                    <DropdownMenu right>
-                      <DropdownItem>Action</DropdownItem>
-                      <DropdownItem>Another action</DropdownItem>
-                      <DropdownItem>Something else here</DropdownItem>
-                    </DropdownMenu>
-                  </ButtonDropdown>
-                </ButtonGroup>
-                <div className="text-value">9.823</div>
-                <div>Members online</div>
               </CardBody>
               <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
+                <Histogram />
               </div>
             </Card>
           </Col>
         </Row>
-        <Row>
+     {/*   <Row>
           <Col>
             <Card>
               <CardBody>
@@ -637,8 +625,8 @@ class Dashboard extends Component {
             </Card>
           </Col>
         </Row>
-
-        <Row>
+*/}
+     {/*   <Row>
           <Col xs="6" sm="6" lg="3">
             <Suspense fallback={this.loading()}>
               <Widget03 dataBox={() => ({ variant: 'facebook', friends: '89k', feeds: '459' })} >
@@ -678,9 +666,9 @@ class Dashboard extends Component {
               </Widget03>
             </Suspense>
           </Col>
-        </Row>
+        </Row>*/}
 
-        <Row>
+       {/* <Row>
           <Col>
             <Card>
               <CardHeader>
@@ -1120,7 +1108,7 @@ class Dashboard extends Component {
               </CardBody>
             </Card>
           </Col>
-        </Row>
+        </Row>*/}
       </div>
     );
   }
