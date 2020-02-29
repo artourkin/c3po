@@ -3,6 +3,7 @@ package at.ac.tuwien.ifs;
 
 import at.ac.tuwien.ifs.FITSObjects.FITSPropertyJsonPath;
 import at.ac.tuwien.ifs.model.CharacterisationResult;
+import at.ac.tuwien.ifs.model.MeasuresProducer;
 import at.ac.tuwien.ifs.model.Property;
 import at.ac.tuwien.ifs.utils.JSONToolkit;
 import org.apache.http.HttpEntity;
@@ -22,9 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class FITSClient {
+public class FITSClient implements MeasuresProducer {
     private String FITS_HOST = "ttp://localhost:8080/";
 
+    @Override
     public String getVersion() throws IOException {
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -32,6 +34,7 @@ public class FITSClient {
         return getString(httpclient.execute(httpGet));
     }
 
+    @Override
     public List<CharacterisationResult> processFile(File file) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
