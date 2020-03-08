@@ -15,7 +15,7 @@ public class PropertyPersistenceService {
     @Inject
     CharacterisationResultRepository characterisationResultRepository;
 
-    public PropertyPersistenceService(){}
+    PropertyPersistenceService(){}
 
     PropertyPersistenceService(CharacterisationResultRepository characterisationResultRepository) {
         this.characterisationResultRepository = characterisationResultRepository;
