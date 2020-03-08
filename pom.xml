@@ -11,7 +11,7 @@
     <description>Characterization, Content and Collection Profiling of Objects</description>
 
     <modules>
-        <module>doi</module>
+        <module>rest</module>
         <module>fits-client</module>
         <module>api</module>
         <module>persistence</module>
