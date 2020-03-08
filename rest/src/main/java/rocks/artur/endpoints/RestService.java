@@ -20,7 +20,7 @@ public class RestService {
     @Path("/properties")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response hello() {
+    public Response getProperties() {
         List<PropertyStatistics> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
 
 
