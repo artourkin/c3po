@@ -1,6 +1,6 @@
 package rocks.artur.endpoints;
 
-import at.ac.tuwien.ifs.CharacterisationResultService;
+import at.ac.tuwien.ifs.PropertyPersistenceService;
 import at.ac.tuwien.ifs.model.statistics.PropertyStatistics;
 
 import javax.inject.Inject;
@@ -15,13 +15,13 @@ import java.util.List;
 public class DigObjOps {
 
     @Inject
-    CharacterisationResultService characterisationResultService;
+    PropertyPersistenceService propertyPersistenceService;
 
     @Path("/properties")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response hello() {
-        List<PropertyStatistics> propertyDistribution = characterisationResultService.getPropertyDistribution();
+        List<PropertyStatistics> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
 
 
         return Response.ok(propertyDistribution).build();

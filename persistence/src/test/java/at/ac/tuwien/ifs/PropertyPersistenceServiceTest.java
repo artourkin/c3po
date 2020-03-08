@@ -14,16 +14,16 @@ import java.util.List;
 
 
 @QuarkusTest
-class CharacterisationResultServiceTest {
+class PropertyPersistenceServiceTest {
 
     @Inject
-    CharacterisationResultService characterisationResultService;
+    PropertyPersistenceService propertyPersistenceService;
 
 
     @Test
     void getAllCharacterisationResultsTest() {
 
-        Iterable<CharacterisationResult> allStudents = characterisationResultService.getAllCharacterisationResults();
+        Iterable<CharacterisationResult> allStudents = propertyPersistenceService.getAllCharacterisationResults();
 
         List<CharacterisationResult> studentList = new ArrayList<>();
         allStudents.forEach(studentList::add);
@@ -32,14 +32,14 @@ class CharacterisationResultServiceTest {
 
     @Test
     void getPropertyDistributionTest() {
-        List<PropertyStatistics> propertyDistribution = characterisationResultService.getPropertyDistribution();
+        List<PropertyStatistics> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
         Assert.assertEquals(3, propertyDistribution.size());
     }
 
     @Test
     void getPropertValueyDistributionTest() {
         List<PropertyValueStatistics> propertyValueStatistics =
-                characterisationResultService.getValueDistributionByProperty(Property.FORMAT);
+                propertyPersistenceService.getValueDistributionByProperty(Property.FORMAT);
 
 
         Assert.assertEquals(2, propertyValueStatistics.size());
@@ -48,7 +48,7 @@ class CharacterisationResultServiceTest {
     @Test
     void getCharacterisationResultsByFilepathTest() {
         Iterable<CharacterisationResult> propertyValueStatistics =
-                characterisationResultService.getCharacterisationResultsByFilepath("/home/artur");
+                propertyPersistenceService.getCharacterisationResultsByFilepath("/home/artur");
 
         List<CharacterisationResult> list = new ArrayList<>();
         propertyValueStatistics.forEach(list::add);

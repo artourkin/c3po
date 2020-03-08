@@ -6,18 +6,18 @@ import at.ac.tuwien.ifs.model.statistics.PropertyStatistics;
 import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistics;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.util.List;
 
 @ApplicationScoped
-public class CharacterisationResultService {
-
-
-    final CharacterisationResultRepository characterisationResultRepository;
+public class PropertyPersistenceService {
 
     @Inject
-    CharacterisationResultService(CharacterisationResultRepository characterisationResultRepository) {
+    CharacterisationResultRepository characterisationResultRepository;
+
+    public PropertyPersistenceService(){}
+
+    PropertyPersistenceService(CharacterisationResultRepository characterisationResultRepository) {
         this.characterisationResultRepository = characterisationResultRepository;
     }
 
@@ -43,7 +43,7 @@ public class CharacterisationResultService {
         return propertyValueDistribution;
     }
 
-    public Iterable<CharacterisationResult> getCharacterisationResultsByFilepath(String filepath){
+    public Iterable<CharacterisationResult> getCharacterisationResultsByFilepath(String filepath) {
         return characterisationResultRepository.findAllByFilePath(filepath);
     }
 
