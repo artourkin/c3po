@@ -52,6 +52,6 @@ class CharacterisationResultServiceTest {
 
         List<CharacterisationResult> list = new ArrayList<>();
         propertyValueStatistics.forEach(list::add);
-        Assert.assertEquals(4, list.size());
+        Assert.assertEquals(3, list.size());
     }
 }
