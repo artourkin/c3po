@@ -2,8 +2,8 @@ package at.ac.tuwien.ifs;
 
 import at.ac.tuwien.ifs.model.CharacterisationResult;
 import at.ac.tuwien.ifs.model.Property;
-import at.ac.tuwien.ifs.model.statistics.PropertyStatistics;
-import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistics;
+import at.ac.tuwien.ifs.model.statistics.PropertyStatistic;
+import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistic;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -30,14 +30,14 @@ public class PropertyPersistenceService {
         return all;
     }
 
-    public List<PropertyStatistics> getPropertyDistribution() {
-        List<PropertyStatistics> propertyDistribution = characterisationResultRepository.getPropertyDistribution();
+    public List<PropertyStatistic> getPropertyDistribution() {
+        List<PropertyStatistic> propertyDistribution = characterisationResultRepository.getPropertyDistribution();
         System.out.println(propertyDistribution);
         return propertyDistribution;
     }
 
-    public List<PropertyValueStatistics> getValueDistributionByProperty(Property property) {
-        List<PropertyValueStatistics> propertyValueDistribution =
+    public List<PropertyValueStatistic> getValueDistributionByProperty(Property property) {
+        List<PropertyValueStatistic> propertyValueDistribution =
                 characterisationResultRepository.getPropertyValueDistribution(property);
         System.out.println(propertyValueDistribution);
         return propertyValueDistribution;

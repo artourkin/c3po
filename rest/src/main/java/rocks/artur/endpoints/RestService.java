@@ -1,7 +1,7 @@
 package rocks.artur.endpoints;
 
 import at.ac.tuwien.ifs.PropertyPersistenceService;
-import at.ac.tuwien.ifs.model.statistics.PropertyStatistics;
+import at.ac.tuwien.ifs.model.statistics.PropertyStatistic;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -21,7 +21,7 @@ public class RestService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProperties() {
-        List<PropertyStatistics> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
+        List<PropertyStatistic> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
 
 
         return Response.ok(propertyDistribution).build();

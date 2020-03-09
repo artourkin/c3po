@@ -2,8 +2,8 @@ package at.ac.tuwien.ifs;
 
 import at.ac.tuwien.ifs.model.CharacterisationResult;
 import at.ac.tuwien.ifs.model.Property;
-import at.ac.tuwien.ifs.model.statistics.PropertyStatistics;
-import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistics;
+import at.ac.tuwien.ifs.model.statistics.PropertyStatistic;
+import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistic;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -16,10 +16,10 @@ public interface CharacterisationResultRepository extends CrudRepository<Charact
     // Page<CharacterisationResult> findAllResultsWithPagination(Pageable pageable);
 
     @Query("select property, count(*) as count from CharacterisationResult group by property")
-    List<PropertyStatistics> getPropertyDistribution();
+    List<PropertyStatistic> getPropertyDistribution();
 
     @Query("select value, count(*) as count from CharacterisationResult where property= ?1 group by value")
-    List<PropertyValueStatistics> getPropertyValueDistribution(Property property);
+    List<PropertyValueStatistic> getPropertyValueDistribution(Property property);
 
 
     List<CharacterisationResult> findAllByFilePath(String filePath);

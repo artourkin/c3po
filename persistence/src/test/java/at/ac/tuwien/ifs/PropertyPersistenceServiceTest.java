@@ -2,8 +2,8 @@ package at.ac.tuwien.ifs;
 
 import at.ac.tuwien.ifs.model.CharacterisationResult;
 import at.ac.tuwien.ifs.model.Property;
-import at.ac.tuwien.ifs.model.statistics.PropertyStatistics;
-import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistics;
+import at.ac.tuwien.ifs.model.statistics.PropertyStatistic;
+import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistic;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -32,13 +32,13 @@ class PropertyPersistenceServiceTest {
 
     @Test
     void getPropertyDistributionTest() {
-        List<PropertyStatistics> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
+        List<PropertyStatistic> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
         Assert.assertEquals(3, propertyDistribution.size());
     }
 
     @Test
     void getPropertValueyDistributionTest() {
-        List<PropertyValueStatistics> propertyValueStatistics =
+        List<PropertyValueStatistic> propertyValueStatistics =
                 propertyPersistenceService.getValueDistributionByProperty(Property.FORMAT);
 
 
