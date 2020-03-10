@@ -10,7 +10,7 @@ class Histogram extends Component {
   }
 
   componentDidMount() {
-    fetch("https://api.mydomain.com")
+    fetch("http://localhost:8081/rest/properties")
       .then(response => response.json())
       .then(data => this.setState({ data }));
   }

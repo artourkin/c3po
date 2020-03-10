@@ -1,9 +1,13 @@
 package at.ac.tuwien.ifs.model.statistics;
 
 import at.ac.tuwien.ifs.model.Property;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PropertyStatistic {
+
+    @JsonProperty
     private Long count;
+    @JsonProperty
     private Property property;
 
     public PropertyStatistic(Long count, Property property) {
