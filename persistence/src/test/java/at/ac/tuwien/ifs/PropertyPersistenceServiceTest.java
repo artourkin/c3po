@@ -32,7 +32,7 @@ class PropertyPersistenceServiceTest {
 
     @Test
     void getPropertyDistributionTest() {
-        List<PropertyStatistic> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
+        List<?> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
         Assert.assertEquals(3, propertyDistribution.size());
     }
 

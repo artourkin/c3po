@@ -8,6 +8,7 @@ import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistic;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class PropertyPersistenceService {
@@ -15,7 +16,8 @@ public class PropertyPersistenceService {
     @Inject
     CharacterisationResultRepository characterisationResultRepository;
 
-    PropertyPersistenceService(){}
+    PropertyPersistenceService() {
+    }
 
     PropertyPersistenceService(CharacterisationResultRepository characterisationResultRepository) {
         this.characterisationResultRepository = characterisationResultRepository;
@@ -31,16 +33,22 @@ public class PropertyPersistenceService {
     }
 
     public List<PropertyStatistic> getPropertyDistribution() {
-        List<PropertyStatistic> propertyDistribution = characterisationResultRepository.getPropertyDistribution();
-        System.out.println(propertyDistribution);
-        return propertyDistribution;
+        List<Object[]> propertyDistribution = characterisationResultRepository.getPropertyDistribution();
+        List<PropertyStatistic> collect = propertyDistribution.stream()
+                .map(stat -> new PropertyStatistic((Long) stat[1], (Property) stat[0]))
+                .collect(Collectors.toList());
+        System.out.println(collect);
+        return collect;
     }
 
     public List<PropertyValueStatistic> getValueDistributionByProperty(Property property) {
-        List<PropertyValueStatistic> propertyValueDistribution =
+        List<Object[]> propertyValueDistribution =
                 characterisationResultRepository.getPropertyValueDistribution(property);
+        List<PropertyValueStatistic> collect = propertyValueDistribution.stream()
+                .map(stat -> new PropertyValueStatistic((String) stat[0], (Long) stat[1]))
+                .collect(Collectors.toList());
         System.out.println(propertyValueDistribution);
-        return propertyValueDistribution;
+        return collect;
     }
 
     public Iterable<CharacterisationResult> getCharacterisationResultsByFilepath(String filepath) {

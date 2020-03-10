@@ -20,4 +20,9 @@ public class PropertyValueStatistic {
     public void setValue(String value) {
         this.value = value;
     }
+
+    public PropertyValueStatistic(String value, Long count) {
+        this.count = count;
+        this.value = value;
+    }
 }

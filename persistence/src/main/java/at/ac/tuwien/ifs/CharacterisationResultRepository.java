@@ -16,10 +16,10 @@ public interface CharacterisationResultRepository extends CrudRepository<Charact
     // Page<CharacterisationResult> findAllResultsWithPagination(Pageable pageable);
 
     @Query("select property, count(*) as count from CharacterisationResult group by property")
-    List<PropertyStatistic> getPropertyDistribution();
+    List<Object[]> getPropertyDistribution();
 
     @Query("select value, count(*) as count from CharacterisationResult where property= ?1 group by value")
-    List<PropertyValueStatistic> getPropertyValueDistribution(Property property);
+    List<Object[]> getPropertyValueDistribution(Property property);
 
 
     List<CharacterisationResult> findAllByFilePath(String filePath);
