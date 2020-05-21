@@ -9,6 +9,10 @@
     <packaging>pom</packaging>
     <name>C3PO</name>
     <description>Characterization, Content and Collection Profiling of Objects</description>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
     <modules>
         <module>rest</module>
