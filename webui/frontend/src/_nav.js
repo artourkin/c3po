@@ -1,6 +1,16 @@
 export default {
   items: [
     {
+      name: 'C3PO Overview',
+      url: '/c3po',
+      icon: 'icon-speedometer',
+      badge: {
+        variant: 'info',
+        text: 'NEW',
+      },
+    },
+
+    {
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',
