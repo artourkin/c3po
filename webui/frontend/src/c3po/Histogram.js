@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Bar, Line } from "react-chartjs-2";
+import {CustomTooltips} from "@coreui/coreui-plugin-chartjs-custom-tooltips";
 
 const bar = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -14,6 +15,43 @@ const bar = {
       data: [65, 59, 80, 81, 56, 55, 40],
     },
   ],
+};
+const options = {
+  tooltips: {
+    enabled: false,
+    custom: CustomTooltips
+  },
+  maintainAspectRatio: true,
+  onClick: f
+}
+
+function f(event, array) {
+  console.log("WOW CLICK");
+  console.log(event);
+  console.log(array);
+  alert(array[0]._index);
+}
+
+const cardChartOpts4 = {
+  tooltips: {
+    enabled: false,
+    custom: CustomTooltips
+  },
+  maintainAspectRatio: false,
+  legend: {
+    display: false,
+  },
+  scales: {
+    xAxes: [
+      {
+        display: true,
+        barPercentage: 0.6,
+      }],
+    yAxes: [
+      {
+        display: true,
+      }],
+  },
 };
 
 class Histogram extends Component {
@@ -48,7 +86,7 @@ class Histogram extends Component {
 
   render() {
     const { hits } = this.state;
-    return <Bar data={bar} height={170} />;
+    return <Bar data={bar} options={options}/>;
   }
 }
 

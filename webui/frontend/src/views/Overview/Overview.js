@@ -82,10 +82,10 @@ class Overview extends Component {
 
     return (
       <div className="animated fadeIn">
-        <Card className="text-white bg-danger">
+        <Card className="text-white">
           <CardBody className="pb-0">
           </CardBody>
-          <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+          <div className="chart-wrapper" >
             <Histogram />
           </div>
         </Card>
