@@ -21,4 +21,15 @@ public interface MeasuresProducer {
      * @throws IOException
      */
     List<CharacterisationResult> processFile(File file) throws IOException;
+
+
+    /***
+     *
+     * This method extracts metadata properties from a given file object passed as a byte array.
+     *
+     * @param file Input File
+     * @return A list of @CharacterisationResult
+     * @throws IOException
+     */
+    List<CharacterisationResult> processFile(byte[] file) throws IOException;
 }

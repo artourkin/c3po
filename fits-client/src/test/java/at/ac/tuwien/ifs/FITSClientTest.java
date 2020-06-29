@@ -12,6 +12,8 @@ import org.mockserver.integration.ClientAndServer;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static org.mockserver.model.HttpRequest.request;
@@ -88,10 +90,34 @@ public class FITSClientTest {
 
 
         FITSClient fitsClient = new FITSClient();
-        fitsClient.setFITS_HOST(String.format("http://localhost:%d/", MOCK_SERVER_PORT));
+        fitsClient.setFITS_URL(String.format("http://localhost:%d/", MOCK_SERVER_PORT));
 
         String s = fitsClient.getVersion();
         Assert.assertEquals("1.5.0", s);
+    }
+
+    @Test
+    void processFileAsByteArrayTest() throws  IOException {
+        mockServer.when(
+                request()
+                        .withMethod("POST")
+                        .withPath("/fits/examine")
+                        .withHeader("\"Content-type\", \"application/json\""))
+                .respond(
+                        response()
+                                .withStatusCode(200)
+                                .withBody(VALID_FITS_RESULT)
+                );
+
+
+        URL resource = getClass().getClassLoader().getResource("README.md");
+        byte[] array = Files.readAllBytes(Paths.get(resource.getPath()));
+
+        FITSClient fitsClient = new FITSClient();
+        fitsClient.setFITS_URL(String.format("http://localhost:%d/fits/", 8088));
+        List<CharacterisationResult> output = fitsClient.processFile(array);
+
+        Assert.assertEquals(12, output.size());
     }
 
 
@@ -110,7 +136,7 @@ public class FITSClientTest {
                 );
 
         FITSClient fitsClient = new FITSClient();
-        fitsClient.setFITS_HOST(String.format("http://localhost:%d/fits/", 8088));
+        fitsClient.setFITS_URL(String.format("http://localhost:%d/fits/", 8088));
 
         URL resource = getClass().getClassLoader().getResource("README.md");
         List<CharacterisationResult> output = fitsClient.processFile(new File(resource.getPath()));
@@ -124,7 +150,7 @@ public class FITSClientTest {
     @Test
     void processFileTestWithoutMock() throws IOException {
         FITSClient fitsClient = new FITSClient();
-        fitsClient.setFITS_HOST(String.format("http://localhost:%d/fits/", 8080));
+        fitsClient.setFITS_URL(String.format("http://localhost:%d/fits/", 8080));
 
         URL resource = getClass().getClassLoader().getResource("README.md");
         List<CharacterisationResult> output = fitsClient.processFile(new File(resource.getPath()));

@@ -24,51 +24,74 @@ import java.util.List;
 import java.util.Set;
 
 public class FITSClient implements MeasuresProducer {
-    private String FITS_HOST = "ttp://localhost:8080/";
+    private String FITS_URL = "http://localhost:8080/";
 
     @Override
     public String getVersion() throws IOException {
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(FITS_HOST + "version");
+        HttpGet httpGet = new HttpGet(getFITS_URL() + "version");
         return getString(httpclient.execute(httpGet));
     }
 
     @Override
     public List<CharacterisationResult> processFile(File file) throws IOException {
+
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
-        HttpPost httppost = new HttpPost(FITS_HOST + "examine");
+        HttpPost httppost = new HttpPost(getFITS_URL() + "examine");
         FileBody bin = new FileBody(file);
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.addPart("datafile", bin);
         HttpEntity reqEntity = builder.build();
         httppost.setEntity(reqEntity);
+        CloseableHttpResponse response = httpclient.execute(httppost);
+        String fitsResultXML = getString(response);
 
-        String fitsResultXML = getString(httpclient.execute(httppost));
+        return extractCharacterisationResults(fitsResultXML);
 
+    }
+
+    public List<CharacterisationResult> processFile(byte[] file) throws IOException {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+
+        HttpPost httppost = new HttpPost(getFITS_URL() + "examine");
+
+        MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+        builder.addBinaryBody("datafile", file);
+        HttpEntity reqEntity = builder.build();
+        httppost.setEntity(reqEntity);
+
+        CloseableHttpResponse response = httpclient.execute(httppost);
+        String fitsResultXML = getString(response);
+
+        return extractCharacterisationResults(fitsResultXML);
+    }
+
+    private List<CharacterisationResult> extractCharacterisationResults(String fitsResultXML) {
+        List<CharacterisationResult> results = new ArrayList<>();
         String fitsResultJSON = JSONToolkit.translateXML(fitsResultXML);
-
         Set<String> availableFitsProperties = JSONToolkit.getAvailableFitsProperties(fitsResultJSON);
 
-        List<CharacterisationResult> results = new ArrayList<>();
-
         availableFitsProperties.forEach(property -> {
-            List<CharacterisationResult> characterisationResults = JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.valueOf(property.toUpperCase()), fitsResultJSON);
+            List<CharacterisationResult> characterisationResults =
+                    JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.valueOf(property.toUpperCase()),
+                            fitsResultJSON);
             results.addAll(characterisationResults);
         });
 
-        List<CharacterisationResult> characterisationResults = JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.IDENTIFICATION, fitsResultJSON);
+        List<CharacterisationResult> characterisationResults =
+                JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.IDENTIFICATION, fitsResultJSON);
         results.addAll(characterisationResults);
 
-        String filepath = results.stream().filter(result -> result.getProperty().equals(Property.FILEPATH)).findFirst().get().getValue().toString();
-
+        String filepath = results.stream().filter(result ->
+                result.getProperty().equals(Property.FILEPATH)).findFirst().get().getValue().toString();
         addFilepathLabel(results, filepath);
 
 
         return results;
-
     }
+
 
     private void addFilepathLabel(List<CharacterisationResult> characterisationResults, String filepath) {
         characterisationResults.stream().forEach(result -> result.setFilePath(filepath));
@@ -87,11 +110,17 @@ public class FITSClient implements MeasuresProducer {
     }
 
 
-    public String getFITS_HOST() {
-        return FITS_HOST;
+    public String getFITS_URL() {
+        String fits_host = System.getenv("FITS_HOST");
+        String fits_port = System.getenv("FITS_PORT");
+        if (fits_host != null && !fits_host.isEmpty() &&
+                fits_port != null && !fits_port.isEmpty()) {
+            return fits_host + ":" + fits_port;
+        }
+        return FITS_URL;
     }
 
-    public void setFITS_HOST(String FITS_HOST) {
-        this.FITS_HOST = FITS_HOST;
+    public void setFITS_URL(String FITS_URL) {
+        this.FITS_URL = FITS_URL;
     }
 }

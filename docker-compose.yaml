@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+
+  fits:
+    build:
+      context: ./fits
+      dockerfile: Dockerfile
+    container_name: fits
+    env_file: .env
+    networks:
+      - web
+    restart: unless-stopped
+    ports:
+      - 8080:8081
+
+  c3po_rest:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rest
+    env_file: .env
+    networks:
+      - web
+    restart: unless-stopped
+    ports:
+      - 8080:8082
+    depends_on:
+      - fits
+
+  c3po_webui:
+    build:
+      context: ./webui
+      dockerfile: Dockerfile
+    container_name: webui
+    env_file: .env
+    networks:
+      - web
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+
+
+
+
+networks:
+  web:
