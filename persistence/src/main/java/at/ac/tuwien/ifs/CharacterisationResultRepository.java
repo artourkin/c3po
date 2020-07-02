@@ -2,8 +2,6 @@ package at.ac.tuwien.ifs;
 
 import at.ac.tuwien.ifs.model.CharacterisationResult;
 import at.ac.tuwien.ifs.model.Property;
-import at.ac.tuwien.ifs.model.statistics.PropertyStatistic;
-import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistic;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

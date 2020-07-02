@@ -13,7 +13,10 @@
 
 
     <properties>
-        <quarkus.version>1.1.1.Final</quarkus.version>
+        <quarkus.version>1.5.0.Final</quarkus.version>
+        <jdbc.version>4.12</jdbc.version>
+        <jandex.version>1.0.7</jandex.version>
+        <maven.compiler.version>3.5.1</maven.compiler.version>
     </properties>
 
 
@@ -30,30 +33,14 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
 
-
-        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.200</version>
-        </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-spring-data-jpa</artifactId>
-        </dependency>
-        <!-- Hibernate ORM specific dependencies -->
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-hibernate-orm</artifactId>
             <version>${quarkus.version}</version>
         </dependency>
+        <!-- Hibernate ORM specific dependencies -->
+
 
         <!-- JDBC driver dependencies -->
         <dependency>
@@ -64,22 +51,18 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
-            <version>1.2.0.Final</version>
+            <version>${quarkus.version}</version>
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${jdbc.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>at.ac.tuwien.ifs</groupId>
             <artifactId>api</artifactId>
@@ -91,7 +74,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>${maven.compiler.version}</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -100,7 +83,7 @@
             <plugin>
                 <groupId>org.jboss.jandex</groupId>
                 <artifactId>jandex-maven-plugin</artifactId>
-                <version>1.0.7</version>
+                <version>${jandex.version}</version>
                 <executions>
                     <execution>
                         <id>make-index</id>
