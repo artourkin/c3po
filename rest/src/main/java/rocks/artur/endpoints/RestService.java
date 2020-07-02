@@ -1,6 +1,7 @@
 package rocks.artur.endpoints;
 
 //import at.ac.tuwien.ifs.FITSClient;
+import at.ac.tuwien.ifs.FITSClient;
 import at.ac.tuwien.ifs.PropertyPersistenceService;
 import at.ac.tuwien.ifs.model.CharacterisationResult;
 import at.ac.tuwien.ifs.model.statistics.PropertyStatistic;
@@ -34,13 +35,11 @@ public class RestService {
         String str = objectMapper.writeValueAsString(propertyDistribution);
         Response response = Response.ok().entity(str).build();
 
-        //WFT HOW COME THIS IMPORT GETS CORRUPTED WHEN ADDING A MAVEN DEP?!?!?!
-
-      //  response.getHeaders().add("Access-Control-Allow-Origin", "*");
-      //  response.getHeaders().add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, " +
-      //          "Authorization");
-      //  response.getHeaders().add("Access-Control-Allow-Credentials", "true");
-      //  response.getHeaders().add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,HEAD");
+        response.getHeaders().add("Access-Control-Allow-Origin", "*");
+        response.getHeaders().add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, " +
+                "Authorization");
+        response.getHeaders().add("Access-Control-Allow-Credentials", "true");
+        response.getHeaders().add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,HEAD");
         return response;
     }
 
@@ -51,7 +50,8 @@ public class RestService {
         List<PropertyStatistic> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
         ObjectMapper objectMapper = new ObjectMapper();
         String str = objectMapper.writeValueAsString(propertyDistribution);
-        //FITSClient fitsClient = new FITSClient();
+
+        FITSClient fitsClient = new FITSClient();
 
         List<CharacterisationResult> results = new ArrayList<>();
 

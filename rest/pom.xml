@@ -15,7 +15,7 @@
     <version>0.8.0</version>
     <properties>
 
-        <quarkus.version>1.1.1.Final</quarkus.version>
+        <quarkus.version>1.2.0.Final</quarkus.version>
 
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
         <maven.compiler.parameters>true</maven.compiler.parameters>
@@ -63,17 +63,8 @@
             <version>0.8.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>2.2.1.GA</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxb-provider</artifactId>
-            <version>2.2.0.GA</version>
-        </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
