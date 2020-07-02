@@ -13,8 +13,8 @@
 
 
     <properties>
-        <quarkus.version>1.5.0.Final</quarkus.version>
-        <jdbc.version>4.12</jdbc.version>
+        <quarkus.version>1.2.0.Final</quarkus.version>
+        <junit.version>4.12</junit.version>
         <jandex.version>1.0.7</jandex.version>
         <maven.compiler.version>3.5.1</maven.compiler.version>
     </properties>
@@ -59,7 +59,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${jdbc.version}</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 

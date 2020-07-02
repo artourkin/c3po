@@ -9,6 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <properties>
+        <junit.version>4.12</junit.version>
         <slf4j.version>1.7.12</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <commons-lang.version>2.6</commons-lang.version>
@@ -20,10 +21,14 @@
         <jdom.version>1.1.3</jdom.version>
         <surefire-plugin.version>2.22.0</surefire-plugin.version>
         <maven.compiler.parameters>true</maven.compiler.parameters>
-        <quarkus.version>1.1.1.Final</quarkus.version>
+        <quarkus.version>1.2.0.Final</quarkus.version>
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
         <maven.compiler.source>1.8</maven.compiler.source>
-        <jackson.version>2.9.10</jackson.version>
+        <jackson.version>2.10.2</jackson.version>
+        <mock-server.version>3.10.8</mock-server.version>
+        <jaxrs.version>2.0.1.Final</jaxrs.version>
+        <rest-assured.version>4.3.0</rest-assured.version>
+        <resteasy.version>4.5.5.Final</resteasy.version>
     </properties>
     <artifactId>fits-client</artifactId>
 
@@ -73,63 +78,33 @@
 
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy</artifactId>
-            <version>1.2.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy-jsonb</artifactId>
-            <version>1.2.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest-client</artifactId>
-            <version>1.2.0.Final</version>
+            <version>${quarkus.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mock-server</groupId>
             <artifactId>mockserver-netty</artifactId>
-            <version>3.10.8</version>
+            <version>${mock-server.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mock-server</groupId>
             <artifactId>mockserver-client-java</artifactId>
-            <version>3.10.8</version>
+            <version>${mock-server.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-yaml</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
+            <groupId>org.jboss.spec.javax.ws.rs</groupId>
+            <artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
+            <version>${jaxrs.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>4.1.2</version>
-            <scope>test</scope>
-        </dependency>
+
+
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
-            <version>1.2.0.Final</version>
+            <version>${quarkus.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
