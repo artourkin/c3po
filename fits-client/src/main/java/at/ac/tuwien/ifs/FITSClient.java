@@ -16,12 +16,13 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-import javax.ws.rs.WebApplicationException;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 
 public class FITSClient implements MeasuresProducer {
     private String FITS_URL = "http://localhost:8080/";
@@ -103,7 +104,7 @@ public class FITSClient implements MeasuresProducer {
         String responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
         if (statusCode > 200) {
             response.close();
-            throw new WebApplicationException(responseBody, statusCode);
+            throw new IOException(responseBody);
         }
 
         return responseBody;
