@@ -13,24 +13,23 @@
 
 
     <properties>
-        <quarkus.version>1.1.1.Final</quarkus.version>
+        <jandex.version>1.0.7</jandex.version>
         <jackson.version>2.9.10</jackson.version>
+        <jakarta.version>2.2.3</jakarta.version>
     </properties>
 
 
-
-
-
     <dependencies>
+
         <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
-            <version>2.2.3</version>
+            <version>${jakarta.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -41,7 +40,7 @@
             <plugin>
                 <groupId>org.jboss.jandex</groupId>
                 <artifactId>jandex-maven-plugin</artifactId>
-                <version>1.0.7</version>
+                <version>${jandex.version}</version>
                 <executions>
                     <execution>
                         <id>make-index</id>
