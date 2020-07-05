@@ -1,21 +1,20 @@
 package rocks.artur.endpoints;
 
 //import at.ac.tuwien.ifs.FITSClient;
-import at.ac.tuwien.ifs.FITSClient;
+
 import at.ac.tuwien.ifs.PropertyPersistenceService;
-import at.ac.tuwien.ifs.model.CharacterisationResult;
 import at.ac.tuwien.ifs.model.statistics.PropertyStatistic;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 
 @Path("/rest")
@@ -24,7 +23,6 @@ public class RestService {
 
     @Inject
     PropertyPersistenceService propertyPersistenceService;
-
 
 
     @Path("/properties")
@@ -46,18 +44,20 @@ public class RestService {
 
     @Path("/file")
     @POST
-    public Response ProcessFile() throws JsonProcessingException {
-        List<PropertyStatistic> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
-        ObjectMapper objectMapper = new ObjectMapper();
-        String str = objectMapper.writeValueAsString(propertyDistribution);
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response ProcessFile(String requestBody) throws JsonProcessingException {
+        //List<PropertyStatistic> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
+        //ObjectMapper objectMapper = new ObjectMapper();
+        //String str = objectMapper.writeValueAsString(propertyDistribution);
 
-        FITSClient fitsClient = new FITSClient();
+        //  FITSClient fitsClient = new FITSClient();
 
-        List<CharacterisationResult> results = new ArrayList<>();
+//        List<CharacterisationResult> results = new ArrayList<>();
 
-        results.forEach(result -> propertyPersistenceService.addCharacterisationResult(result));
+        //      results.forEach(result -> propertyPersistenceService.addCharacterisationResult(result));
 
-        Response response = Response.ok().build();
+        Response response = Response.ok(requestBody).build();
 
         return response;
     }

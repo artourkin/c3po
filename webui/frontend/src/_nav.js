@@ -1,6 +1,16 @@
 export default {
   items: [
     {
+      name: 'File Upload',
+      url: '/upload',
+      icon: 'icon-speedometer',
+      badge: {
+        variant: 'info',
+        text: 'NEW',
+      },
+    },
+
+    {
       name: 'C3PO Overview',
       url: '/c3po',
       icon: 'icon-speedometer',
