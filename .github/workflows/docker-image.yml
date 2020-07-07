@@ -14,10 +14,27 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Build and push the Docker image
+      - name: Build and push C3PO REST
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: artourkin/c3po
+          repository: artourkin/c3po-rest
           tag_with_ref: true
+          dockerfile: {path}/Dockerfile
+      - name: Build and push C3PO WEBUI
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: artourkin/c3po-webui
+          tag_with_ref: true
+          dockerfile: {path}/webui/Dockerfile
+      - name: Build and push FITS WEB
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: artourkin/fits-web
+          tag_with_ref: true
+          dockerfile: {path}/fits/Dockerfile
