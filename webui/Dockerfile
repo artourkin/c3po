@@ -7,5 +7,6 @@ FROM openjdk:8-jdk-slim
 WORKDIR /app
 RUN printenv
 COPY --from=builder /app/webui/target/webui-0.8.0.jar .
+COPY --from=builder /app/webui/target/libs/ .
 
 ENTRYPOINT ["java", "-jar", "webui-0.8.0-runner.jar"]

@@ -7,5 +7,6 @@ FROM openjdk:8-jdk-slim
 WORKDIR /app
 RUN printenv
 COPY --from=builder /app/rest/target/rest-0.8.0-runner.jar .
+COPY --from=builder /app/rest/target/libs/ .
 
 ENTRYPOINT ["java", "-jar", "rest-0.8.0-runner.jar"]

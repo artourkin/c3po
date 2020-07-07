@@ -3,42 +3,36 @@ version: '3'
 services:
 
   fits:
-    build:
-      context: ./fits
-      dockerfile: Dockerfile
+    image: artourkin/fits-web:new_generation
     container_name: fits
     env_file: .env
     networks:
       - web
     restart: unless-stopped
     ports:
-      - 8080:8081
+      - 8081:8080
 
-  c3po_rest:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  rest:
+    image: artourkin/c3po-rest:new_generation
     container_name: rest
     env_file: .env
     networks:
       - web
     restart: unless-stopped
     ports:
-      - 8080:8082
+      - 8082:8080
     depends_on:
       - fits
 
-  c3po_webui:
-    build:
-      context: ./webui
-      dockerfile: Dockerfile
+  webui:
+    image: artourkin/c3po-webui:new_generation
     container_name: webui
     env_file: .env
     networks:
       - web
     restart: unless-stopped
     ports:
-      - 8080:8080
+      - 8083:8080
 
 
 
