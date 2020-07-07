@@ -6,6 +6,6 @@ RUN mvn -pl :webui clean install
 FROM openjdk:8-jdk-slim
 WORKDIR /app
 RUN printenv
-COPY --from=builder /app/target/webui-0.8.0-runner.jar .
+COPY --from=builder /app/webui/target/webui-0.8.0.jar .
 
 ENTRYPOINT ["java", "-jar", "webui-0.8.0-runner.jar"]
