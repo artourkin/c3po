@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,7 +19,6 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/rest")
-@Produces(MediaType.APPLICATION_JSON)
 public class RestService {
 
     @Inject
@@ -27,6 +27,7 @@ public class RestService {
 
     @Path("/properties")
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getProperties() throws JsonProcessingException {
         List<PropertyStatistic> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -42,22 +43,12 @@ public class RestService {
     }
 
 
-    @Path("/file")
+    @Path("/upload")
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response ProcessFile(String requestBody) throws JsonProcessingException {
-        //List<PropertyStatistic> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
-        //ObjectMapper objectMapper = new ObjectMapper();
-        //String str = objectMapper.writeValueAsString(propertyDistribution);
-
-        //  FITSClient fitsClient = new FITSClient();
-
-//        List<CharacterisationResult> results = new ArrayList<>();
-
-        //      results.forEach(result -> propertyPersistenceService.addCharacterisationResult(result));
-
-        Response response = Response.ok(requestBody).build();
+    public Response ProcessFile(@FormParam("file") String fileUpload) {
+        // Map<String, List<InputPart>> formDataMap = fileUpload.getFormDataMap();
+        Response response = Response.ok(fileUpload).build();
 
         return response;
     }
