@@ -29,7 +29,7 @@ function f(event, array) {
     console.log("WOW CLICK");
     console.log(event);
     console.log(array);
-    alert(process.env.REST_HOST);
+    alert(process.env.REACT_APP_REST_HOST);
 
 }
 
@@ -66,7 +66,7 @@ class Histogram extends Component {
     }
 
     componentDidMount() {
-        let url = "http://" + {REST_HOST} + ":" + {REST_PORT};
+        let url = "http://" + process.env.REACT_APP_REST_HOST + ":" + process.env.REACT_APP_REST_PORT;
 
         fetch(url + "/rest/properties")
             .then(response => response.json())
