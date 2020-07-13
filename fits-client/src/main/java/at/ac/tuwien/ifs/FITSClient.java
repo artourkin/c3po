@@ -17,15 +17,16 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 
+import javax.enterprise.context.ApplicationScoped;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-
+//@ApplicationScoped
 public class FITSClient implements MeasuresProducer {
-    private String FITS_URL = "http://localhost:8080/";
+    private String FITS_URL = "http://localhost:8088/";
 
     @Override
     public String getVersion() throws IOException {

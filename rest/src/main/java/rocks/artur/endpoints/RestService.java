@@ -1,21 +1,19 @@
 package rocks.artur.endpoints;
 
-//import at.ac.tuwien.ifs.FITSClient;
 
+import at.ac.tuwien.ifs.FITSClient;
 import at.ac.tuwien.ifs.PropertyPersistenceService;
+import at.ac.tuwien.ifs.model.CharacterisationResult;
 import at.ac.tuwien.ifs.model.statistics.PropertyStatistic;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
 import java.util.List;
 
 @Path("/rest")
@@ -42,13 +40,21 @@ public class RestService {
         return response;
     }
 
+    //@Inject
+    //FITSClient fitsClient;
 
     @Path("/upload")
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response ProcessFile(@FormParam("file") String fileUpload) {
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response ProcessFile(@MultipartForm FileUploadFormBean fileUpload) throws IOException {
         // Map<String, List<InputPart>> formDataMap = fileUpload.getFormDataMap();
-        Response response = Response.ok(fileUpload).build();
+        FITSClient fitsClient = new FITSClient();
+        List<CharacterisationResult> characterisationResults = fitsClient.processFile(fileUpload.getFile());
+
+      //  characterisationResults.forEach(propertyPersistenceService::addCharacterisationResult);
+
+        Response response = Response.ok(fileUpload.getFile()).build();
 
         return response;
     }
