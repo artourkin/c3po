@@ -18,3 +18,4 @@ c3po-webapi/war/
 .vagrant_settings/maven_settings.xml
 .vagrant_settings/proxy_settings.conf
 */*.lock
+*.lock
