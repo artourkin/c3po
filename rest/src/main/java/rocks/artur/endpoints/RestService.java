@@ -57,14 +57,8 @@ public class RestService {
         List<CharacterisationResult> characterisationResults = fitsClient.processFile(fileUpload.getFile());
         characterisationResults.forEach(propertyPersistenceService::addCharacterisationResult);
 
-        List<PropertyStatistic> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
-        System.out.println(propertyDistribution);
-
-        Iterable<CharacterisationResult> allCharacterisationResults = propertyPersistenceService.getAllCharacterisationResults();
-
-        allCharacterisationResults.forEach(characterisationResult -> System.out.println(characterisationResult));
-
-        Response response = Response.ok().build();
+        Response response =
+                Response.ok(characterisationResults.size() + " characterisation results were processed").build();
 
         return response;
     }
