@@ -16,8 +16,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-
-import javax.enterprise.context.ApplicationScoped;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -117,7 +115,7 @@ public class FITSClient implements MeasuresProducer {
         String fits_port = System.getenv("FITS_PORT");
         if (fits_host != null && !fits_host.isEmpty() &&
                 fits_port != null && !fits_port.isEmpty()) {
-            return fits_host + ":" + fits_port;
+            return String.format("http://%s:%s/", fits_host, fits_port);
         }
         return FITS_URL;
     }
