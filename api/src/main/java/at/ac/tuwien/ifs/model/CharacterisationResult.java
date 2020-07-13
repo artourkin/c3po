@@ -1,8 +1,6 @@
 package at.ac.tuwien.ifs.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,9 +12,9 @@ import javax.persistence.Id;
 public class CharacterisationResult {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @JsonIgnore
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@JsonIgnore
+    private String id;
     @Enumerated(EnumType.STRING)
     private Property property;
     private String value;
@@ -24,6 +22,16 @@ public class CharacterisationResult {
     private ValueType valueType;
     private String source;
     private String filePath;
+
+    public static CharacterisationResult deepCopy(CharacterisationResult characterisationResult) {
+        CharacterisationResult result = new CharacterisationResult();
+        result.setFilePath(characterisationResult.filePath);
+        result.setValue(characterisationResult.value);
+        result.setProperty(characterisationResult.property);
+        result.setSource(characterisationResult.source);
+        result.setValueType(characterisationResult.valueType);
+        return result;
+    }
 
     public Property getProperty() {
         return property;
@@ -77,11 +85,11 @@ public class CharacterisationResult {
         this.filePath = filePath;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 }

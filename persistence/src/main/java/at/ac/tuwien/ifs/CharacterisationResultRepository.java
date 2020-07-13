@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface CharacterisationResultRepository extends CrudRepository<CharacterisationResult, Long> {
+public interface CharacterisationResultRepository extends CrudRepository<CharacterisationResult, String> {
     // @Query(
     //         value = "SELECT * FROM CharacterisationResults ORDER BY id \n-- #pageable\n",
     //         countQuery = "SELECT count(*) FROM CharacterisationResults")

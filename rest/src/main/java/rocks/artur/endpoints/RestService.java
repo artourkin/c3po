@@ -10,7 +10,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import javax.inject.Inject;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -51,10 +55,16 @@ public class RestService {
         // Map<String, List<InputPart>> formDataMap = fileUpload.getFormDataMap();
         FITSClient fitsClient = new FITSClient();
         List<CharacterisationResult> characterisationResults = fitsClient.processFile(fileUpload.getFile());
+        characterisationResults.forEach(propertyPersistenceService::addCharacterisationResult);
 
-      //  characterisationResults.forEach(propertyPersistenceService::addCharacterisationResult);
+        List<PropertyStatistic> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
+        System.out.println(propertyDistribution);
 
-        Response response = Response.ok(fileUpload.getFile()).build();
+        Iterable<CharacterisationResult> allCharacterisationResults = propertyPersistenceService.getAllCharacterisationResults();
+
+        allCharacterisationResults.forEach(characterisationResult -> System.out.println(characterisationResult));
+
+        Response response = Response.ok().build();
 
         return response;
     }

@@ -7,6 +7,7 @@ import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistic;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,9 @@ public class PropertyPersistenceService {
         this.characterisationResultRepository = characterisationResultRepository;
     }
 
+    @Transactional
     public void addCharacterisationResult(CharacterisationResult characterisationResult) {
+        //CharacterisationResult copy = CharacterisationResult.deepCopy(characterisationResult);
         characterisationResultRepository.save(characterisationResult);
     }
 
