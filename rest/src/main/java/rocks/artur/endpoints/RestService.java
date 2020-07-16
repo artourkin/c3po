@@ -19,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/rest")
 public class RestService {
@@ -56,9 +57,15 @@ public class RestService {
         FITSClient fitsClient = new FITSClient();
         List<CharacterisationResult> characterisationResults = fitsClient.processFile(fileUpload.getFile());
         characterisationResults.forEach(propertyPersistenceService::addCharacterisationResult);
-
+        List<String> collect =
+                characterisationResults.stream()
+                        .map(result -> String.format("file: %s, property: %s, value: %s",
+                                result.getFilePath(),
+                                result.getProperty(),
+                                result.getValue()))
+                        .collect(Collectors.toList());
         Response response =
-                Response.ok(characterisationResults.size() + " characterisation results were processed").build();
+                Response.ok(collect).build();
 
         return response;
     }
