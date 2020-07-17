@@ -64,6 +64,7 @@
                 <version>1.9.0</version>
                 <configuration>
                     <workingDirectory>frontend</workingDirectory>
+                    <installDirectory>target</installDirectory>
                     <nodeVersion>${node.version}</nodeVersion>
                     <yarnVersion>${yarn.version}</yarnVersion>
                 </configuration>
