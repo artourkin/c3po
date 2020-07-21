@@ -28,6 +28,8 @@ services:
     image: artourkin/c3po-webui:new_generation
     container_name: webui
     env_file: .env
+    stdin_open: true
+    tty: true
     networks:
       - web
     restart: unless-stopped
