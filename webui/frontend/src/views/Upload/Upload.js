@@ -87,7 +87,13 @@ class Upload extends Component {
     onClickHandler = () => {
         const data = new FormData();
         data.append('file', this.state.selectedFile);
-        axios.post("http://${process.env.REST_HOST}:${process.env.REST_PORT}/upload", data, {
+
+        let url = "http://" + process.env.REACT_APP_REST_HOST + ":" + process.env.REACT_APP_REST_PORT;
+
+        console.log(url);
+
+        axios.post(url + "/rest/upload", data, {
+            headers: {"Access-Control-Allow-Origin": "*"},
             onUploadProgress: ProgressEvent => {
                 this.setState({
                     loaded: (ProgressEvent.loaded / ProgressEvent.total * 100),
@@ -98,7 +104,8 @@ class Upload extends Component {
                 console.log('upload success')
             })
             .catch(err => { // then print response status
-                console.log('upload fail')
+                console.log(err);
+                console.log('upload fail');
             });
 
 
