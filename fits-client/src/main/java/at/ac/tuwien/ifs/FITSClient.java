@@ -27,7 +27,7 @@ import java.util.Set;
 
 //@ApplicationScoped
 public class FITSClient implements MeasuresProducer {
-    private static final Logger LOG = LoggerFactory.getLogger( FITSClient.class );
+    private static final Logger LOG = LoggerFactory.getLogger(FITSClient.class);
 
     private String FITS_URL = "http://localhost:8888";
 
@@ -58,12 +58,12 @@ public class FITSClient implements MeasuresProducer {
 
     }
 
-    public List<CharacterisationResult> processFile(byte[] file) throws IOException {
+    public List<CharacterisationResult> processFile(byte[] file, String filename) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         System.out.println(new String(file));
         HttpPost httppost = new HttpPost(getFITS_URL() + "/fits/examine");
 
-        ByteArrayBody body = new ByteArrayBody(file, "NOT_A_REAL_FILE_NAME");
+        ByteArrayBody body = new ByteArrayBody(file, filename);
 
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.addPart("datafile", body);

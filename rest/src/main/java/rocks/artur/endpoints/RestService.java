@@ -51,7 +51,8 @@ public class RestService {
         // Map<String, List<InputPart>> formDataMap = fileUpload.getFormDataMap();
         FITSClient fitsClient = new FITSClient();
         //System.out.println(new String(fileUpload.getFile()));
-        List<CharacterisationResult> characterisationResults = fitsClient.processFile(fileUpload.getFile());
+        List<CharacterisationResult> characterisationResults = fitsClient.processFile(fileUpload.getFile(),
+                fileUpload.getFilename());
         characterisationResults.forEach(propertyPersistenceService::addCharacterisationResult);
         List<String> collect =
                 characterisationResults.stream()

@@ -97,7 +97,7 @@ public class FITSClientTest {
     }
 
     @Test
-    void processFileAsByteArrayTest() throws  IOException {
+    void processFileAsByteArrayTest() throws IOException {
         mockServer.when(
                 request()
                         .withMethod("POST")
@@ -115,7 +115,7 @@ public class FITSClientTest {
 
         FITSClient fitsClient = new FITSClient();
         fitsClient.setFITS_URL(String.format("http://localhost:%d", MOCK_SERVER_PORT));
-        List<CharacterisationResult> output = fitsClient.processFile(array);
+        List<CharacterisationResult> output = fitsClient.processFile(array, "testFileName");
 
         Assert.assertEquals(12, output.size());
     }
@@ -168,7 +168,7 @@ public class FITSClientTest {
 
         URL resource = getClass().getClassLoader().getResource("README.md");
         File file = new File(resource.getPath());
-        List<CharacterisationResult> output = fitsClient.processFile(Files.readAllBytes(file.toPath()));
+        List<CharacterisationResult> output = fitsClient.processFile(Files.readAllBytes(file.toPath()), "testFileName");
 
         Assert.assertEquals(9, output.size());
     }

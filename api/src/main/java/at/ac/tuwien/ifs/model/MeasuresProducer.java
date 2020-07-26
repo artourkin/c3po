@@ -28,8 +28,9 @@ public interface MeasuresProducer {
      * This method extracts metadata properties from a given file object passed as a byte array.
      *
      * @param file Input File
+     * @param filename
      * @return A list of @CharacterisationResult
      * @throws IOException
      */
-    List<CharacterisationResult> processFile(byte[] file) throws IOException;
+    List<CharacterisationResult> processFile(byte[] file, String filename) throws IOException;
 }
