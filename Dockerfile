@@ -9,4 +9,5 @@ RUN printenv
 COPY --from=builder /app/rest/target/rest-0.8.0-runner.jar .
 COPY --from=builder /app/rest/target/lib/ ./lib/
 
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "rest-0.8.0-runner.jar"]

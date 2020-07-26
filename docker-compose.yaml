@@ -34,10 +34,7 @@ services:
       - web
     restart: unless-stopped
     ports:
-      - 8083:8080
-
-
-
+      - 8080:8080
 
 networks:
   web:

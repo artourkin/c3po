@@ -11,10 +11,13 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,13 +27,15 @@ import java.util.Set;
 
 //@ApplicationScoped
 public class FITSClient implements MeasuresProducer {
-    private String FITS_URL = "http://localhost:8088/";
+    private static final Logger LOG = LoggerFactory.getLogger( FITSClient.class );
+
+    private String FITS_URL = "http://localhost:8888";
 
     @Override
     public String getVersion() throws IOException {
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(getFITS_URL() + "version");
+        HttpGet httpGet = new HttpGet(getFITS_URL() + "/version");
         return getString(httpclient.execute(httpGet));
     }
 
@@ -39,7 +44,7 @@ public class FITSClient implements MeasuresProducer {
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
-        HttpPost httppost = new HttpPost(getFITS_URL() + "examine");
+        HttpPost httppost = new HttpPost(getFITS_URL() + "/fits/examine");
         FileBody bin = new FileBody(file);
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.addPart("datafile", bin);
@@ -47,24 +52,28 @@ public class FITSClient implements MeasuresProducer {
         httppost.setEntity(reqEntity);
         CloseableHttpResponse response = httpclient.execute(httppost);
         String fitsResultXML = getString(response);
-
+        LOG.debug(fitsResultXML);
+        System.out.println(fitsResultXML);
         return extractCharacterisationResults(fitsResultXML);
 
     }
 
     public List<CharacterisationResult> processFile(byte[] file) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
+        System.out.println(new String(file));
+        HttpPost httppost = new HttpPost(getFITS_URL() + "/fits/examine");
 
-        HttpPost httppost = new HttpPost(getFITS_URL() + "examine");
+        ByteArrayBody body = new ByteArrayBody(file, "NOT_A_REAL_FILE_NAME");
 
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-        builder.addBinaryBody("datafile", file);
+        builder.addPart("datafile", body);
         HttpEntity reqEntity = builder.build();
         httppost.setEntity(reqEntity);
 
         CloseableHttpResponse response = httpclient.execute(httppost);
         String fitsResultXML = getString(response);
-
+        LOG.debug(fitsResultXML);
+        System.out.println(fitsResultXML);
         return extractCharacterisationResults(fitsResultXML);
     }
 
@@ -115,7 +124,7 @@ public class FITSClient implements MeasuresProducer {
         String fits_port = System.getenv("FITS_PORT");
         if (fits_host != null && !fits_host.isEmpty() &&
                 fits_port != null && !fits_port.isEmpty()) {
-            return String.format("http://%s:%s/", fits_host, fits_port);
+            return String.format("http://%s:%s", fits_host, fits_port);
         }
         return FITS_URL;
     }

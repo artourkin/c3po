@@ -21,7 +21,7 @@ RUN echo "shared.loader=/fits/lib/*.jar" >> $CATALINA_BASE/conf/catalina.propert
 RUN echo "http.port=${FITS_PORT}" >> $CATALINA_BASE/conf/catalina.properties
 
 
-
+EXPOSE 8080
 ENTRYPOINT ["catalina.sh"]
 CMD ["run"]
 

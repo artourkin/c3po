@@ -6,6 +6,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -17,6 +18,7 @@ import org.mockserver.integration.ClientAndServer;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -29,9 +31,9 @@ import static org.mockserver.model.HttpResponse.response;
 @QuarkusTest
 class RestServiceTest {
 
-    private ClientAndServer mockServer;
+    private ClientAndServer mockFitsServer;
 
-    private int MOCK_SERVER_PORT = 8088;
+    private int MOCK_FITS_SERVER_PORT = 8888;
 
     public static String VALID_FITS_RESULT = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<fits xmlns=\"http://hul.harvard.edu/ois/xml/ns/fits/fits_output\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://hul.harvard.edu/ois/xml/ns/fits/fits_output http://hul.harvard.edu/ois/xml/xsd/fits/fits_output.xsd\" version=\"1.5.0\" timestamp=\"2/19/20 1:26 PM\">\n" +
@@ -75,12 +77,12 @@ class RestServiceTest {
 
     @BeforeEach
     void setUp() {
-        mockServer = mockServer.startClientAndServer(MOCK_SERVER_PORT);
+        mockFitsServer = mockFitsServer.startClientAndServer(MOCK_FITS_SERVER_PORT);
     }
 
     @AfterEach
     public void stopServer() {
-        mockServer.stop();
+        mockFitsServer.stop();
     }
 
     @Test
@@ -98,7 +100,7 @@ class RestServiceTest {
 
     @Test
     void uploadFileTest() throws IOException {
-        mockServer.when(
+        mockFitsServer.when(
                 request()
                         .withMethod("POST")
                         .withPath("/examine")
@@ -117,8 +119,16 @@ class RestServiceTest {
         URL resource = getClass().getClassLoader().getResource("README.md");
         File file = new File(resource.getPath());
 
+
+
+
+
+
+        ByteArrayBody body = new ByteArrayBody(Files.readAllBytes(file.toPath()), "NOT_A_REAL_FILE_NAME");
+
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-        builder.addBinaryBody("file", file);
+
+        builder.addPart("file", body);
         HttpEntity reqEntity = builder.build();
         httppost.setEntity(reqEntity);
 

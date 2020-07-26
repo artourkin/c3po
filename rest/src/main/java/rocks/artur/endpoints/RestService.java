@@ -50,6 +50,7 @@ public class RestService {
     public Response ProcessFile(@MultipartForm FileUploadFormBean fileUpload) throws IOException {
         // Map<String, List<InputPart>> formDataMap = fileUpload.getFormDataMap();
         FITSClient fitsClient = new FITSClient();
+        //System.out.println(new String(fileUpload.getFile()));
         List<CharacterisationResult> characterisationResults = fitsClient.processFile(fileUpload.getFile());
         characterisationResults.forEach(propertyPersistenceService::addCharacterisationResult);
         List<String> collect =

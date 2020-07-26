@@ -23,7 +23,7 @@ import static org.mockserver.model.HttpResponse.response;
 public class FITSClientTest {
     private ClientAndServer mockServer;
 
-    private int MOCK_SERVER_PORT = 8088;
+    private int MOCK_SERVER_PORT = 8888;
 
     public static String VALID_FITS_RESULT = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<fits xmlns=\"http://hul.harvard.edu/ois/xml/ns/fits/fits_output\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://hul.harvard.edu/ois/xml/ns/fits/fits_output http://hul.harvard.edu/ois/xml/xsd/fits/fits_output.xsd\" version=\"1.5.0\" timestamp=\"2/19/20 1:26 PM\">\n" +
@@ -114,7 +114,7 @@ public class FITSClientTest {
         byte[] array = Files.readAllBytes(Paths.get(resource.getPath()));
 
         FITSClient fitsClient = new FITSClient();
-        fitsClient.setFITS_URL(String.format("http://localhost:%d/fits/", 8088));
+        fitsClient.setFITS_URL(String.format("http://localhost:%d", MOCK_SERVER_PORT));
         List<CharacterisationResult> output = fitsClient.processFile(array);
 
         Assert.assertEquals(12, output.size());
@@ -136,7 +136,7 @@ public class FITSClientTest {
                 );
 
         FITSClient fitsClient = new FITSClient();
-        fitsClient.setFITS_URL(String.format("http://localhost:%d/fits/", 8088));
+        fitsClient.setFITS_URL(String.format("http://localhost:%d", MOCK_SERVER_PORT));
 
         URL resource = getClass().getClassLoader().getResource("README.md");
         List<CharacterisationResult> output = fitsClient.processFile(new File(resource.getPath()));
@@ -150,11 +150,26 @@ public class FITSClientTest {
     @Test
     void processFileTestWithoutMock() throws IOException {
         FITSClient fitsClient = new FITSClient();
-        fitsClient.setFITS_URL(String.format("http://localhost:%d/fits/", 8080));
+        fitsClient.setFITS_URL(String.format("http://localhost:%d", 8088));
 
         URL resource = getClass().getClassLoader().getResource("README.md");
         List<CharacterisationResult> output = fitsClient.processFile(new File(resource.getPath()));
 
         Assert.assertEquals(12, output.size());
+    }
+
+
+    //The test can be run against running FITS service, i.e. fits-docker
+    @Disabled
+    @Test
+    void processByteArrayTestWithoutMock() throws IOException {
+        FITSClient fitsClient = new FITSClient();
+        fitsClient.setFITS_URL(String.format("http://localhost:%d", 8088));
+
+        URL resource = getClass().getClassLoader().getResource("README.md");
+        File file = new File(resource.getPath());
+        List<CharacterisationResult> output = fitsClient.processFile(Files.readAllBytes(file.toPath()));
+
+        Assert.assertEquals(9, output.size());
     }
 }
