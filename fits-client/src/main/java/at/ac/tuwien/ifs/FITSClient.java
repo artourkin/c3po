@@ -60,7 +60,6 @@ public class FITSClient implements MeasuresProducer {
 
     public List<CharacterisationResult> processFile(byte[] file, String filename) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        System.out.println(new String(file));
         HttpPost httppost = new HttpPost(getFITS_URL() + "/fits/examine");
 
         ByteArrayBody body = new ByteArrayBody(file, filename);
@@ -73,7 +72,6 @@ public class FITSClient implements MeasuresProducer {
         CloseableHttpResponse response = httpclient.execute(httppost);
         String fitsResultXML = getString(response);
         LOG.debug(fitsResultXML);
-        System.out.println(fitsResultXML);
         return extractCharacterisationResults(fitsResultXML);
     }
 

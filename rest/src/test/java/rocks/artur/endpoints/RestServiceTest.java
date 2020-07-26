@@ -103,7 +103,7 @@ class RestServiceTest {
         mockFitsServer.when(
                 request()
                         .withMethod("POST")
-                        .withPath("/examine")
+                        .withPath("/fits/examine")
                         .withHeader("\"Content-type\", \"application/json\""))
                 .respond(
                         response()
@@ -114,15 +114,10 @@ class RestServiceTest {
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
-        HttpPost httppost = new HttpPost("http://localhost:8081/rest/upload");
+        HttpPost httppost = new HttpPost("http://localhost:8080/rest/upload");
 
         URL resource = getClass().getClassLoader().getResource("README.md");
         File file = new File(resource.getPath());
-
-
-
-
-
 
         ByteArrayBody body = new ByteArrayBody(Files.readAllBytes(file.toPath()), "NOT_A_REAL_FILE_NAME");
 
