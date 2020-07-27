@@ -19,7 +19,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Path("/rest")
 public class RestService {
@@ -50,19 +49,18 @@ public class RestService {
     public Response ProcessFile(@MultipartForm FileUploadFormBean fileUpload) throws IOException {
         // Map<String, List<InputPart>> formDataMap = fileUpload.getFormDataMap();
         FITSClient fitsClient = new FITSClient();
-        //System.out.println(new String(fileUpload.getFile()));
-        List<CharacterisationResult> characterisationResults = fitsClient.processFile(fileUpload.getFile(),
-                fileUpload.getFilename());
-        characterisationResults.forEach(propertyPersistenceService::addCharacterisationResult);
-        List<String> collect =
-                characterisationResults.stream()
-                        .map(result -> String.format("file: %s, property: %s, value: %s",
-                                result.getFilePath(),
-                                result.getProperty(),
-                                result.getValue()))
-                        .collect(Collectors.toList());
+        Integer totalCount = 0;
+
+        String filename = fileUpload.getFilename();
+        byte[] bytes = fileUpload.getFile();
+        System.out.println(String.format("Processing file { %s }", filename));
+        List<CharacterisationResult> results = fitsClient.processFile(bytes, filename);
+        results.forEach(propertyPersistenceService::addCharacterisationResult);
+        totalCount += results.size();
+
+
         Response response =
-                Response.ok(collect).build();
+                Response.ok(totalCount).build();
 
         return response;
     }

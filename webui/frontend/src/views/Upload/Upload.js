@@ -1,10 +1,10 @@
 import React, {Component, lazy} from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import {Progress} from 'reactstrap';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import {Row,} from 'reactstrap';
 import {getStyle} from '@coreui/coreui/dist/js/coreui-utilities'
-
-import {Progress} from 'reactstrap';
-import { ToastContainer, toast } from 'react-toastify';
 
 const Widget03 = lazy(() => import('../../views/Widgets/Widget03'));
 
@@ -33,6 +33,8 @@ class Upload extends Component {
         this.state = {
             dropdownOpen: false,
             radioSelected: 2,
+            selectedFile: null,
+            loaded:0
         };
     }
 
@@ -71,29 +73,35 @@ class Upload extends Component {
                     </div>
                 </div>
 
-                <Row>
-                </Row>
+                <div className="form-group">
+                    <ToastContainer/>
+                    <Progress max="100" color="success" value={this.state.loaded} >{Math.round(this.state.loaded,2) }%</Progress>
+                </div>
             </div>
         );
     }
 
     onChangeHandler = event => {
         this.setState({
-            selectedFile: event.target.files[0],
+            selectedFile: event.target.files,
             loaded: 0,
         });
         console.log(event.target.files[0]);
     }
     onClickHandler = () => {
         const data = new FormData();
-        data.append('file', this.state.selectedFile);
+
+        for( var x = 0;x <this.state.selectedFile.length;x++ ) {
+
+            data.append("file", this.state.selectedFile[x]);
+            data.append("filename", this.state.selectedFile[x].name);
+        }
 
         let url = "http://" + process.env.REACT_APP_REST_HOST + ":" + process.env.REACT_APP_REST_PORT;
 
         console.log(url);
 
         axios.post(url + "/rest/upload", data, {
-            headers: {"Access-Control-Allow-Origin": "*"},
             onUploadProgress: ProgressEvent => {
                 this.setState({
                     loaded: (ProgressEvent.loaded / ProgressEvent.total * 100),
@@ -101,11 +109,13 @@ class Upload extends Component {
             },
         })
             .then(res => { // then print response status
-                console.log('upload success')
+                console.log('upload success');
+                toast.success('upload success');
             })
             .catch(err => { // then print response status
                 console.log(err);
                 console.log('upload fail');
+                toast.error('upload fail');
             });
 
 
