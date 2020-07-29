@@ -10,6 +10,9 @@ public enum Property {
     SIZE,
     MD5CHECKSUM,
     FSLASTMODIFIED,
-    FILEPATH
+    FILEPATH,
+    CREATED,
+    CREATINGAPPLICATIONNAME;
+
 
 }

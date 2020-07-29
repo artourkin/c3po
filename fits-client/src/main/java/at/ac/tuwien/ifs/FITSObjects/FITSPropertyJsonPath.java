@@ -6,7 +6,10 @@ public enum FITSPropertyJsonPath {
     FILEPATH("$.fits.fileinfo.filepath"),
     MD5CHECKSUM("$.fits.fileinfo.md5checksum"),
     FSLASTMODIFIED("$.fits.fileinfo.fslastmodified"),
-    IDENTIFICATION("$.fits.identification");
+    IDENTIFICATION("$.fits.identification"),
+    CREATINGAPPLICATIONNAME("$.fits.fileinfo.creatingApplicationName"),
+    CREATED("$.fits.fileinfo.created"),
+    LASTMODIFIED("$.fits.fileinfo.lastmodified");
 
 
 

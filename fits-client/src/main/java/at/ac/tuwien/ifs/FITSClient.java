@@ -72,7 +72,7 @@ public class FITSClient implements MeasuresProducer {
         CloseableHttpResponse response = httpclient.execute(httppost);
         String fitsResultXML = getString(response);
         LOG.debug(fitsResultXML);
-        //System.out.println(fitsResultXML);
+        System.out.println(fitsResultXML);
         return extractCharacterisationResults(fitsResultXML);
     }
 
