@@ -84,12 +84,19 @@ public class JSONToolkit {
 
         Map read = document.read(jsonPath.getFitsProperty(), Map.class);
 
-        if (read.size()==1) {
-
+        if (read.size() == 1) {
 
             IdentityProperty identityProperty = document.read(jsonPath.getFitsProperty() + ".identity", IdentityProperty.class);
 
+            Object version = identityProperty.getVersion();
+
+            GenericProperty identityVersion = null;
+            if (version != null) {
+                identityVersion = document.read(jsonPath.getFitsProperty() + ".identity.version", GenericProperty.class);
+            }
+
             Object tool = identityProperty.getTool();
+
             if (tool instanceof List) {
 
                 List toolArray = (List) tool;
@@ -98,6 +105,9 @@ public class JSONToolkit {
 
                     CharacterisationResult tmpResult = new CharacterisationResult();
                     setValues(tmpResult, Property.FORMAT, identityProperty.getFormat());
+                    if (identityVersion != null) {
+                        tmpResult.setValue(tmpResult.getValue() + identityVersion.getContent());
+                    }
                     ToolIdentity toolIdentity = document.read(String.format(jsonPath.getFitsProperty() + ".identity.tool[%d]", j), ToolIdentity.class);
                     tmpResult.setSource(toolIdentity.getToolname() + ":" + toolIdentity.getToolversion());
                     result.add(tmpResult);
@@ -107,11 +117,13 @@ public class JSONToolkit {
                     tmpResult.setSource(toolIdentity.getToolname() + ":" + toolIdentity.getToolversion());
                     result.add(tmpResult);
 
-
                 }
             } else {
                 CharacterisationResult tmpResult = new CharacterisationResult();
                 setValues(tmpResult, Property.FORMAT, identityProperty.getFormat());
+                if (identityVersion != null) {
+                    tmpResult.setValue(tmpResult.getValue() + identityVersion.getContent());
+                }
                 ToolIdentity toolIdentity = document.read(jsonPath.getFitsProperty() + ".identity.tool",
                         ToolIdentity.class);
                 tmpResult.setSource(toolIdentity.getToolname() + ":" + toolIdentity.getToolversion());
@@ -128,7 +140,6 @@ public class JSONToolkit {
                 ExternalIdentifierProperty genericProperty = document.read(jsonPath.getFitsProperty() + ".identity.externalIdentifier", ExternalIdentifierProperty.class);
                 CharacterisationResult tmpResult = new CharacterisationResult();
                 setValues(tmpResult, Property.valueOf("externalIdentifier".toUpperCase()), genericProperty.getContent());
-                ToolIdentity toolIdentity = document.read(jsonPath.getFitsProperty() + ".identity.tool", ToolIdentity.class);
                 tmpResult.setSource(genericProperty.getToolname() + ":" + genericProperty.getToolversion());
                 result.add(tmpResult);
             }
@@ -141,6 +152,15 @@ public class JSONToolkit {
 
                 IdentityProperty identityProperty = document.read(String.format(jsonPath.getFitsProperty() + ".identity.[%d]", i), IdentityProperty.class);
 
+
+                Object version = identityProperty.getVersion();
+
+                GenericProperty identityVersion = null;
+                if (version != null) {
+                    identityVersion = document.read(jsonPath.getFitsProperty() + ".identity.[%d].version", GenericProperty.class);
+                }
+
+
                 Object tool = identityProperty.getTool();
                 if (tool instanceof List) {
 
@@ -150,6 +170,9 @@ public class JSONToolkit {
 
                         CharacterisationResult tmpResult = new CharacterisationResult();
                         setValues(tmpResult, Property.FORMAT, identityProperty.getFormat());
+                        if (identityVersion != null) {
+                            tmpResult.setValue(tmpResult.getValue() + identityVersion.getContent());
+                        }
                         ToolIdentity toolIdentity = document.read(String.format(jsonPath.getFitsProperty() + ".identity.[%d].tool[%d]", i, j), ToolIdentity.class);
                         tmpResult.setSource(toolIdentity.getToolname() + ":" + toolIdentity.getToolversion());
                         result.add(tmpResult);
@@ -164,6 +187,9 @@ public class JSONToolkit {
                 } else {
                     CharacterisationResult tmpResult = new CharacterisationResult();
                     setValues(tmpResult, Property.FORMAT, identityProperty.getFormat());
+                    if (identityVersion != null) {
+                        tmpResult.setValue(tmpResult.getValue() + identityVersion.getContent());
+                    }
                     ToolIdentity toolIdentity = document.read(String.format(jsonPath.getFitsProperty() + ".identity.[%d].tool", i), ToolIdentity.class);
                     tmpResult.setSource(toolIdentity.getToolname() + ":" + toolIdentity.getToolversion());
                     result.add(tmpResult);
@@ -179,7 +205,6 @@ public class JSONToolkit {
                     ExternalIdentifierProperty genericProperty = document.read(String.format(jsonPath.getFitsProperty() + ".identity.[%d].externalIdentifier", i), ExternalIdentifierProperty.class);
                     CharacterisationResult tmpResult = new CharacterisationResult();
                     setValues(tmpResult, Property.valueOf("externalIdentifier".toUpperCase()), genericProperty.getContent());
-                    ToolIdentity toolIdentity = document.read(String.format(jsonPath.getFitsProperty() + ".identity.[%d].tool", i), ToolIdentity.class);
                     tmpResult.setSource(genericProperty.getToolname() + ":" + genericProperty.getToolversion());
                     result.add(tmpResult);
                 }

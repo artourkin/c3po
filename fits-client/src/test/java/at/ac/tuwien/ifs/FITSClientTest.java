@@ -65,6 +65,78 @@ public class FITSClientTest {
             "\n" +
             "\n";
 
+
+    public static String VALID_FITS_RESULT2 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<fits xmlns=\"http://hul.harvard.edu/ois/xml/ns/fits/fits_output\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://hul.harvard.edu/ois/xml/ns/fits/fits_output http://hul.harvard.edu/ois/xml/xsd/fits/fits_output.xsd\" version=\"1.5.0\" timestamp=\"7/29/20 7:50 PM\">\n" +
+            "  <identification>\n" +
+            "    <identity format=\"Portable Network Graphics\" mimetype=\"image/png\" toolname=\"FITS\" toolversion=\"1.5.0\">\n" +
+            "      <tool toolname=\"Droid\" toolversion=\"6.4\" />\n" +
+            "      <tool toolname=\"Exiftool\" toolversion=\"11.54\" />\n" +
+            "      <tool toolname=\"ffident\" toolversion=\"0.2\" />\n" +
+            "      <tool toolname=\"Tika\" toolversion=\"1.21\" />\n" +
+            "      <version toolname=\"Droid\" toolversion=\"6.4\">1.0</version>\n" +
+            "      <externalIdentifier toolname=\"Droid\" toolversion=\"6.4\" type=\"puid\">fmt/11</externalIdentifier>\n" +
+            "    </identity>\n" +
+            "  </identification>\n" +
+            "  <fileinfo>\n" +
+            "    <filepath toolname=\"OIS File Information\" toolversion=\"1.0\" status=\"SINGLE_RESULT\">/usr/local/tomcat/webapps/fits/upload/1596052237783/main</filepath>\n" +
+            "    <filename toolname=\"OIS File Information\" toolversion=\"1.0\" status=\"SINGLE_RESULT\">main</filename>\n" +
+            "    <size toolname=\"OIS File Information\" toolversion=\"1.0\" status=\"SINGLE_RESULT\">1875256</size>\n" +
+            "    <md5checksum toolname=\"OIS File Information\" toolversion=\"1.0\" status=\"SINGLE_RESULT\">926a7c8c079e4ccb837410746b2919e2</md5checksum>\n" +
+            "    <fslastmodified toolname=\"OIS File Information\" toolversion=\"1.0\" status=\"SINGLE_RESULT\">1596052237000</fslastmodified>\n" +
+            "  </fileinfo>\n" +
+            "  <filestatus />\n" +
+            "  <metadata>\n" +
+            "    <image>\n" +
+            "      <compressionScheme toolname=\"Exiftool\" toolversion=\"11.54\" status=\"CONFLICT\">Deflate/Inflate</compressionScheme>\n" +
+            "      <compressionScheme toolname=\"Tika\" toolversion=\"1.21\" status=\"CONFLICT\">Deflate</compressionScheme>\n" +
+            "      <imageWidth toolname=\"Exiftool\" toolversion=\"11.54\">2400</imageWidth>\n" +
+            "      <imageHeight toolname=\"Exiftool\" toolversion=\"11.54\">1531</imageHeight>\n" +
+            "      <orientation toolname=\"Tika\" toolversion=\"1.21\" status=\"SINGLE_RESULT\">normal*</orientation>\n" +
+            "      <standard>\n" +
+            "        <mix:mix xmlns:mix=\"http://www.loc.gov/mix/v20\">\n" +
+            "          <mix:BasicDigitalObjectInformation>\n" +
+            "            <mix:Compression>\n" +
+            "              <mix:compressionScheme>Deflate/Inflate</mix:compressionScheme>\n" +
+            "            </mix:Compression>\n" +
+            "          </mix:BasicDigitalObjectInformation>\n" +
+            "          <mix:BasicImageInformation>\n" +
+            "            <mix:BasicImageCharacteristics>\n" +
+            "              <mix:imageWidth>2400</mix:imageWidth>\n" +
+            "              <mix:imageHeight>1531</mix:imageHeight>\n" +
+            "              <mix:PhotometricInterpretation />\n" +
+            "            </mix:BasicImageCharacteristics>\n" +
+            "          </mix:BasicImageInformation>\n" +
+            "          <mix:ImageCaptureMetadata>\n" +
+            "            <mix:GeneralCaptureInformation />\n" +
+            "            <mix:orientation>normal*</mix:orientation>\n" +
+            "          </mix:ImageCaptureMetadata>\n" +
+            "          <mix:ImageAssessmentMetadata>\n" +
+            "            <mix:SpatialMetrics />\n" +
+            "            <mix:ImageColorEncoding />\n" +
+            "          </mix:ImageAssessmentMetadata>\n" +
+            "        </mix:mix>\n" +
+            "      </standard>\n" +
+            "    </image>\n" +
+            "  </metadata>\n" +
+            "  <statistics fitsExecutionTime=\"2488\">\n" +
+            "    <tool toolname=\"MediaInfo\" toolversion=\"0.7.75\" status=\"did not run\" />\n" +
+            "    <tool toolname=\"OIS Audio Information\" toolversion=\"0.1\" status=\"did not run\" />\n" +
+            "    <tool toolname=\"ADL Tool\" toolversion=\"0.1\" status=\"did not run\" />\n" +
+            "    <tool toolname=\"VTT Tool\" toolversion=\"0.1\" status=\"did not run\" />\n" +
+            "    <tool toolname=\"Droid\" toolversion=\"6.4\" executionTime=\"34\" />\n" +
+            "    <tool toolname=\"Jhove\" toolversion=\"1.20.1\" executionTime=\"2454\" />\n" +
+            "    <tool toolname=\"file utility\" toolversion=\"5.35\" executionTime=\"136\" />\n" +
+            "    <tool toolname=\"Exiftool\" toolversion=\"11.54\" executionTime=\"318\" />\n" +
+            "    <tool toolname=\"NLNZ Metadata Extractor\" toolversion=\"3.6GA\" status=\"did not run\" />\n" +
+            "    <tool toolname=\"OIS File Information\" toolversion=\"1.0\" executionTime=\"33\" />\n" +
+            "    <tool toolname=\"OIS XML Metadata\" toolversion=\"0.2\" status=\"did not run\" />\n" +
+            "    <tool toolname=\"ffident\" toolversion=\"0.2\" executionTime=\"32\" />\n" +
+            "    <tool toolname=\"Tika\" toolversion=\"1.21\" executionTime=\"46\" />\n" +
+            "  </statistics>\n" +
+            "</fits>\n";
+
+
     @BeforeEach
     void setUp() {
         mockServer = mockServer.startClientAndServer(MOCK_SERVER_PORT);

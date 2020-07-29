@@ -2,12 +2,14 @@ package at.ac.tuwien.ifs.FITSObjects;
 
 import java.util.Map;
 
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class IdentityProperty {
     private String format;
     private String toolname;
     private String toolversion;
     private String mimetype;
     private Object tool;
+    private Object version;
     private Map<String, Object> externalIdentifier;
 
     public String getFormat() {
@@ -68,5 +70,13 @@ public class IdentityProperty {
                 ", tool=" + tool +
                 ", externalIdentifier=" + externalIdentifier +
                 '}';
+    }
+
+    public Object getVersion() {
+        return version;
+    }
+
+    public void setVersion(Object version) {
+        this.version = version;
     }
 }

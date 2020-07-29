@@ -21,6 +21,13 @@ class JSONToolkitTest {
     }
 
     @Test
+    void getCharacterisationResult2Test() {
+        String jsonString = JSONToolkit.translateXML(FITSClientTest.VALID_FITS_RESULT2);
+        List<CharacterisationResult> results = JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.IDENTIFICATION,
+                jsonString);
+    }
+
+    @Test
     void getCharacterisationResultTest() {
         String jsonString = JSONToolkit.translateXML(FITSClientTest.VALID_FITS_RESULT);
         List<CharacterisationResult> results = JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.FILENAME,
