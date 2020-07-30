@@ -25,6 +25,7 @@ class JSONToolkitTest {
         String jsonString = JSONToolkit.translateXML(FITSClientTest.VALID_FITS_RESULT2);
         List<CharacterisationResult> results = JSONToolkit.getCharacterisationResults(FITSPropertyJsonPath.IDENTIFICATION,
                 jsonString);
+        System.out.println(results);
     }
 
     @Test

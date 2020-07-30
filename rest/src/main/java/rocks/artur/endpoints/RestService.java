@@ -4,7 +4,9 @@ package rocks.artur.endpoints;
 import at.ac.tuwien.ifs.FITSClient;
 import at.ac.tuwien.ifs.PropertyPersistenceService;
 import at.ac.tuwien.ifs.model.CharacterisationResult;
+import at.ac.tuwien.ifs.model.Property;
 import at.ac.tuwien.ifs.model.statistics.PropertyStatistic;
+import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistic;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -14,6 +16,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -34,6 +37,20 @@ public class RestService {
         List<PropertyStatistic> propertyDistribution = propertyPersistenceService.getPropertyDistribution();
         ObjectMapper objectMapper = new ObjectMapper();
         String str = objectMapper.writeValueAsString(propertyDistribution);
+        Response response = Response.ok().entity(str).build();
+
+        return response;
+    }
+
+    @Path("/property/{name}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPropertyValueDistibution(@PathParam("name") String propertyName) throws JsonProcessingException {
+
+        List<PropertyValueStatistic> valueDistributionByProperty =
+                propertyPersistenceService.getValueDistributionByProperty(Property.valueOf(propertyName.toUpperCase()));
+        ObjectMapper objectMapper = new ObjectMapper();
+        String str = objectMapper.writeValueAsString(valueDistributionByProperty);
         Response response = Response.ok().entity(str).build();
 
         return response;
