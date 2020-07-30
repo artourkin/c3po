@@ -29,7 +29,6 @@ function f(event, array) {
     console.log("WOW CLICK");
     console.log(event);
     console.log(array);
-    alert(process.env.REACT_APP_REST_HOST);
 
 }
 
@@ -68,7 +67,7 @@ class Histogram extends Component {
     componentDidMount() {
         let url = "http://" + process.env.REACT_APP_REST_HOST + ":" + process.env.REACT_APP_REST_PORT;
 
-        fetch(url + "/rest/properties")
+        fetch(url + "/rest/property/" + this.props.prop)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -81,7 +80,7 @@ class Histogram extends Component {
         //bar.labels = data.
         bar.datasets[0].data = data.map(item => item.count);
         bar.data = data.map(item => item.count);
-        bar.labels = data.map(item => item.property);
+        bar.labels = data.map(item => item.value);
         return bar;
     }
 

@@ -1,28 +1,8 @@
-import React, { Component, lazy, Suspense } from 'react';
-import { Bar, Line } from 'react-chartjs-2';
-import {
-  Badge,
-  Button,
-  ButtonDropdown,
-  ButtonGroup,
-  ButtonToolbar,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Col,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Progress,
-  Row,
-  Table,
-} from 'reactstrap';
-import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
+import React, {Component, lazy} from 'react';
+import {Card, CardBody,} from 'reactstrap';
+import {getStyle} from '@coreui/coreui/dist/js/coreui-utilities'
 import Histogram from '../../c3po/Histogram.js'
+
 const Widget03 = lazy(() => import('../Widgets/Widget03'));
 
 const brandPrimary = getStyle('--primary')
@@ -35,9 +15,8 @@ const brandDanger = getStyle('--danger')
 
 //Random Numbers
 function random(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
 
 
 var elements = 27;
@@ -46,53 +25,63 @@ var data2 = [];
 var data3 = [];
 
 for (var i = 0; i <= elements; i++) {
-  data1.push(random(50, 200));
-  data2.push(random(80, 100));
-  data3.push(65);
+    data1.push(random(50, 200));
+    data2.push(random(80, 100));
+    data3.push(65);
 }
 
 class Overview extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.toggle = this.toggle.bind(this);
-    this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
+        this.toggle = this.toggle.bind(this);
+        this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
 
-    this.state = {
-      dropdownOpen: false,
-      radioSelected: 2,
-    };
-  }
+        this.state = {
+            dropdownOpen: false,
+            radioSelected: 2,
+        };
+    }
 
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen,
-    });
-  }
+    toggle() {
+        this.setState({
+            dropdownOpen: !this.state.dropdownOpen,
+        });
+    }
 
-  onRadioBtnClick(radioSelected) {
-    this.setState({
-      radioSelected: radioSelected,
-    });
-  }
+    onRadioBtnClick(radioSelected) {
+        this.setState({
+            radioSelected: radioSelected,
+        });
+    }
 
-  loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
+    loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
-  render() {
+    render() {
+        const format = 'format';
+        const mimetype = 'mimetype';
+        return (
 
-    return (
-      <div className="animated fadeIn">
-        <Card className="text-white">
-          <CardBody className="pb-0">
-          </CardBody>
-          <div className="chart-wrapper" >
-            <Histogram />
-          </div>
-        </Card>
 
-      </div>
-    );
-  }
+            <div className="animated fadeIn">
+                <Card className="text-white">
+                    <CardBody className="pb-0">
+                    </CardBody>
+                    <div className="chart-wrapper">
+                        <Histogram prop={format}/>
+                    </div>
+                </Card>
+                <Card className="text-white">
+                    <CardBody className="pb-0">
+                    </CardBody>
+                    <div className="chart-wrapper">
+                        <Histogram prop={mimetype}/>
+                    </div>
+                </Card>
+
+            </div>
+        );
+    }
 }
 
 export default Overview;
