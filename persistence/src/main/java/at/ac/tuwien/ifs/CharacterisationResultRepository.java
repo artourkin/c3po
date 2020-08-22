@@ -1,6 +1,7 @@
 package at.ac.tuwien.ifs;
 
 import at.ac.tuwien.ifs.model.CharacterisationResult;
+import at.ac.tuwien.ifs.model.Filter;
 import at.ac.tuwien.ifs.model.Property;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,6 +22,8 @@ public interface CharacterisationResultRepository extends CrudRepository<Charact
 
 
     List<CharacterisationResult> findAllByFilePath(String filePath);
+
+    List<Object[]> getPropertyValueDistribution(Property property, Filter filter);
     //  @Query("select property, count(*) as num from CharacterisationResult group by property")
     //  Collection getDistributionDEV();
 }

@@ -4,6 +4,7 @@ package rocks.artur.endpoints;
 import at.ac.tuwien.ifs.FITSClient;
 import at.ac.tuwien.ifs.PropertyPersistenceService;
 import at.ac.tuwien.ifs.model.CharacterisationResult;
+import at.ac.tuwien.ifs.model.Filter;
 import at.ac.tuwien.ifs.model.Property;
 import at.ac.tuwien.ifs.model.statistics.PropertyStatistic;
 import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistic;
@@ -55,6 +56,22 @@ public class RestService {
 
         return response;
     }
+
+
+    @Path("/property/{name}")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPropertyValueDistibutionWithFilter(@PathParam("name") String propertyName, Filter filter) throws JsonProcessingException {
+
+        List<PropertyValueStatistic> valueDistributionByProperty =
+                propertyPersistenceService.getValueDistributionByProperty(Property.valueOf(propertyName.toUpperCase()), filter);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String str = objectMapper.writeValueAsString(valueDistributionByProperty);
+        Response response = Response.ok().entity(str).build();
+
+        return response;
+    }
+
 
     //@Inject
     //FITSClient fitsClient;

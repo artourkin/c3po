@@ -1,5 +1,24 @@
 import React, {Component, lazy} from 'react';
-import {Card, CardBody,} from 'reactstrap';
+import {
+    Badge,
+    Button,
+    ButtonDropdown,
+    ButtonGroup,
+    ButtonToolbar,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+    Col,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Progress,
+    Row,
+    Table,
+} from 'reactstrap';
 import {getStyle} from '@coreui/coreui/dist/js/coreui-utilities'
 import Histogram from '../../c3po/Histogram.js'
 
@@ -64,20 +83,40 @@ class Overview extends Component {
 
 
             <div className="animated fadeIn">
-                <Card className="text-white">
-                    <CardBody className="pb-0">
-                    </CardBody>
-                    <div className="chart-wrapper">
-                        <Histogram prop={format}/>
-                    </div>
-                </Card>
-                <Card className="text-white">
-                    <CardBody className="pb-0">
-                    </CardBody>
-                    <div className="chart-wrapper">
-                        <Histogram prop={mimetype}/>
-                    </div>
-                </Card>
+                <Row>
+                    <Col xs="12" sm="6" lg="3">
+                        <Card className="text-white">
+                            <CardBody className="pb-0">
+                            </CardBody>
+                            <div className="chart-wrapper">
+                                <Histogram prop={format}/>
+                            </div>
+                        </Card>
+                    </Col>
+
+
+                    <Col xs="12" sm="6" lg="3">
+                        <Card className="text-white">
+                            <CardBody className="pb-0">
+                            </CardBody>
+                            <div className="chart-wrapper">
+                                <Histogram prop={mimetype}/>
+                            </div>
+                        </Card>
+                    </Col>
+
+                    <Col xs="12" sm="6" lg="3">
+                        <Card className="text-white">
+                            <CardBody className="pb-0">
+                            </CardBody>
+                            <div className="chart-wrapper">
+                                <Histogram prop="valid"/>
+                            </div>
+                        </Card>
+                    </Col>
+                </Row>
+
+
 
             </div>
         );

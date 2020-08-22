@@ -1,6 +1,7 @@
 package at.ac.tuwien.ifs;
 
 import at.ac.tuwien.ifs.model.CharacterisationResult;
+import at.ac.tuwien.ifs.model.Filter;
 import at.ac.tuwien.ifs.model.Property;
 import at.ac.tuwien.ifs.model.statistics.PropertyStatistic;
 import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistic;
@@ -59,4 +60,7 @@ public class PropertyPersistenceService {
     }
 
 
+    public List<PropertyValueStatistic> getValueDistributionByProperty(Property property, Filter filter) {
+        characterisationResultRepository.getPropertyValueDistribution(property, filter);
+    }
 }
