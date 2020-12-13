@@ -1,6 +1,8 @@
 package at.ac.tuwien.ifs.model;
 
 
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,6 +23,7 @@ public class CharacterisationResult {
     @Enumerated(EnumType.STRING)
     private ValueType valueType;
     private String source;
+    @Column(nullable = false)
     private String filePath;
 
     public static CharacterisationResult deepCopy(CharacterisationResult characterisationResult) {

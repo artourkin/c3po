@@ -37,12 +37,21 @@ class PropertyPersistenceServiceTest {
     }
 
     @Test
-    void getPropertValueyDistributionTest() {
+    void getPropertValueyDistributionFormatTest() {
         List<PropertyValueStatistic> propertyValueStatistics =
                 propertyPersistenceService.getValueDistributionByProperty(Property.FORMAT);
 
 
         Assert.assertEquals(2, propertyValueStatistics.size());
+    }
+
+    @Test
+    void getPropertValueyDistributionTest() {
+        List<PropertyValueStatistic> propertyValueStatistics =
+                propertyPersistenceService.getValueDistributionByProperty(Property.MIMETYPE);
+
+
+        Assert.assertEquals(new Long(1), propertyValueStatistics.get(0).getCount());
     }
 
     @Test

@@ -5,6 +5,8 @@ import at.ac.tuwien.ifs.model.Filter;
 import at.ac.tuwien.ifs.model.Property;
 import at.ac.tuwien.ifs.model.statistics.PropertyStatistic;
 import at.ac.tuwien.ifs.model.statistics.PropertyValueStatistic;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -61,6 +63,13 @@ public class PropertyPersistenceService {
 
 
     public List<PropertyValueStatistic> getValueDistributionByProperty(Property property, Filter filter) {
-        characterisationResultRepository.getPropertyValueDistribution(property, filter);
+        CharacterisationResult result = new CharacterisationResult();
+        result.setFilePath("/home/artur");
+
+        Example<CharacterisationResult> of = Example.of(result);
+        //characterisationResultRepository.
+
+        //characterisationResultRepository.getPropertyValueDistribution(property, filter);
+        return null;
     }
 }
