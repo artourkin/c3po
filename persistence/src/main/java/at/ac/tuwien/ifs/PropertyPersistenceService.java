@@ -49,7 +49,7 @@ public class PropertyPersistenceService {
 
     public List<PropertyValueStatistic> getValueDistributionByProperty(Property property) {
         List<Object[]> propertyValueDistribution =
-                characterisationResultRepository.getPropertyValueDistribution(property);
+                characterisationResultRepository.getPropertyValueCountPerFile(property);
         List<PropertyValueStatistic> collect = propertyValueDistribution.stream()
                 .map(stat -> new PropertyValueStatistic((String) stat[0], (Long) stat[1]))
                 .collect(Collectors.toList());

@@ -17,9 +17,15 @@ public interface CharacterisationResultRepository extends CrudRepository<Charact
     @Query("select property, count(*) as count from CharacterisationResult group by property")
     List<Object[]> getPropertyDistribution();
 
-    @Query("select COUNT(distinct value) as VALUES_COUNT, filePath from CharacterisationResult where property= ?1 group by filePath ")
-    List<Object[]> getPropertyValueDistribution(Property property);
+    @Query("select COUNT(distinct value) as VALUES_COUNT, filePath, property, CASE WHEN COUNT(distinct value) = 1 " +
+            "THEN value ELSE 'CONFLICTED' END AS username from CharacterisationResult where " +
+            "property= ?1 group by CASE WHEN COUNT(distinct value) = 1 THEN filePath ELSE 'CONFLICTED' END; ")
+    List<Object[]> getPropertyValueCountPerFile(Property property);
 
+    @Query("Select (select COUNT(distinct value) as VALUES_COUNT, filePath from CharacterisationResult where " +
+            "property= ?1 " +
+            "group by filePath)")
+    List<Object[]> getPropertyValueCountPerFileDistribution(Property property);
 
 
     @Query("select value, count(*) as count from CharacterisationResult where property= ?1 group by value")
